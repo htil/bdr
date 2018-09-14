@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/ejsawyers/brain_drone_race_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ejsawyers/brain_drone_race_ws/install -G Unix Makefiles
