@@ -1,4 +1,5 @@
-# This is where all openCV-related things will happen.
+#!/usr/bin/env python
+# This package is where all openCV-related things will happen.
 from sensor_msgs.msg import Image
 
 def line_error():

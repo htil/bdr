@@ -6,7 +6,7 @@ set(bebop_brain_drone_race_BUILD_DEPENDS "roscpp" "rospy" "std_msgs" "bebop_msgs
 set(bebop_brain_drone_race_BUILD_EXPORT_DEPENDS "roscpp" "rospy" "std_msgs" "bebop_msgs")
 set(bebop_brain_drone_race_BUILDTOOL_DEPENDS "catkin")
 set(bebop_brain_drone_race_BUILDTOOL_EXPORT_DEPENDS )
-set(bebop_brain_drone_race_EXEC_DEPENDS "roscpp" "rospy" "std_msgs" "bebop_msgs" "bebop_msgs")
+set(bebop_brain_drone_race_EXEC_DEPENDS "roscpp" "rospy" "std_msgs" "bebop_msgs")
 set(bebop_brain_drone_race_RUN_DEPENDS "roscpp" "rospy" "std_msgs" "bebop_msgs")
 set(bebop_brain_drone_race_TEST_DEPENDS )
 set(bebop_brain_drone_race_DOC_DEPENDS )

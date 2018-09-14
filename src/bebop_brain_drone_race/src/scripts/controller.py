@@ -11,7 +11,6 @@ class Controller():
         rospy.init_node("controller", anonymous=True)
         self.takeoff_pub = rospy.Publisher("/bebop/takeoff", Empty, queue_size=10)
         self.land_pub = rospy.Publisher("/bebop/land", Empty, queue_size=10)
-        self.cmd_pub = rospy.Publisher("/bebop/cmd_vel", Twist, queue_size=10)
 
     def takeoff(self):
         print "takeoff"
@@ -23,25 +22,19 @@ class Controller():
         message = Empty()
         self.land_pub.publish(message)
 
-    def listen(self):
-        usr_input = ""
-
-        while usr_input != "q":
-            usr_input = raw_input("Takoff(t), Land(l), or Quit(q): ")
-            
-            if usr_input.lower() == "t":
-                bebop_controller.takeoff()
-            elif usr_input.lower() == "l":
-                bebop_controller.land()
-            elif usr_input.lower() == "q":
-                bebop_controller.land()
-                break
-            else:
-                break   
-
-
 if __name__ == "__main__":
-    controller = Controller()
-    controller.listen()
+    bebop_controller = Controller()
+    usr_input = ""
 
+    while usr_input != "q":
+        usr_input = raw_input("Takoff(t), Land(l), or Quit(q): ")
         
+        if usr_input.lower() == "t":
+            bebop_controller.takeoff()
+        elif usr_input.lower() == "l":
+            bebop_controller.land()
+        elif usr_input.lower() == "q":
+            bebop_controller.land()
+            break
+        else:
+            break
