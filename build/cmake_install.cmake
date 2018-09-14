@@ -117,6 +117,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/ejsawyers/brain_drone_race_ws/build/gtest/cmake_install.cmake")
+  include("/home/ejsawyers/brain_drone_race_ws/build/bebop_brain_drone_race/cmake_install.cmake")
 
 endif()
 

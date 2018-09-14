@@ -2,4 +2,4 @@
 source_root_dir = "/home/ejsawyers/brain_drone_race_ws/src"
 whitelisted_packages = "".split(';') if "" != "" else []
 blacklisted_packages = "".split(';') if "" != "" else []
-underlay_workspaces = "/opt/ros/kinetic".split(';') if "/opt/ros/kinetic" != "" else []
+underlay_workspaces = "/home/ejsawyers/brain_drone_race_ws/devel;/home/ejsawyers/bebop_ws/devel;/opt/ros/kinetic".split(';') if "/home/ejsawyers/brain_drone_race_ws/devel;/home/ejsawyers/bebop_ws/devel;/opt/ros/kinetic" != "" else []

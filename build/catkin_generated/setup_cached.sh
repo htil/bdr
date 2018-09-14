@@ -7,7 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/ejsawyers/brain_drone_race_ws/devel:$CMAKE_PREFIX_PATH"
 export PWD="/home/ejsawyers/brain_drone_race_ws/build"
-export ROSLISP_PACKAGE_DIRECTORIES="/home/ejsawyers/brain_drone_race_ws/devel/share/common-lisp"
-export ROS_PACKAGE_PATH="/home/ejsawyers/brain_drone_race_ws/src:$ROS_PACKAGE_PATH"

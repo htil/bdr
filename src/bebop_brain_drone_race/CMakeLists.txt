@@ -8,10 +8,10 @@ project(bebop_brain_drone_race)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  bebop_autonomy
+  bebop_msgs
   roscpp
   rospy
-  std_msg
+  std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
