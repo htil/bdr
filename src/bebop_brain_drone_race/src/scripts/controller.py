@@ -5,6 +5,7 @@ import rospy
 from std_msgs.msg import Empty
 from std_msgs.msg import Float64
 from geometry_msgs.msg import Twist
+import time 
 
 class Controller():
     def __init__(self):
@@ -16,21 +17,23 @@ class Controller():
         self.velocity = Twist()
 
     def takeoff(self):
-        print "takeoff"
         message = Empty()
         self.takeoff_pub.publish(message)
 
     def land(self):
-        print "land"
         message = Empty()
         self.land_pub.publish(message)
 
     def move_y(self, data):
-    if (data.data < 0):
-        self.velocity.linear.y = 0.25
-    else:
-        self.velocity.linear.y = -0.25
-        self.velocity_pub.publish(self.velocity)
+        if data.data < 0:
+            self.velocity.linear.y = 0.25
+            self.vleocity_pub.publish(self.velocity)
+        elif data.data > 0:
+            self.velocity.linear.y = -0.25
+            self.velocity_pub.publish(self.velocity)
+        else:
+            self.velocity.linear.y = 0
+            self.velocity_pub.publish(self.velocity)
     
     def move_x(self):
         self.velocity.linear.x = 1.0
@@ -54,6 +57,4 @@ if __name__ == "__main__":
             bebop_controller.move_x()
         elif usr_input.lower() == "q":
             bebop_controller.land()
-            break
-        else:
             break

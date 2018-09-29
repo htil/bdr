@@ -12,11 +12,11 @@ class LineError():
 
     def CalcError(self):
         # apply a Gaussian blur and convert to an HLS image
-        blur = cv2.blur(self.image,(20,20))
+        blur = cv2.blur(self.image,(5,5))
         hls  = cv2.cvtColor(blur, cv2.COLOR_RGB2HLS)
 
         # apply a color filter
-        lower_range = np.array([50, 50, 115], dtype=np.uint8)
+        lower_range = np.array([100, 100, 65], dtype=np.uint8)
         upper_range = np.array([255, 255, 255], dtype=np.uint8)
         mask = cv2.inRange(hls, lower_range, upper_range)
         masked_image = cv2.bitwise_and(self.image, self.image, mask=mask)
@@ -25,7 +25,7 @@ class LineError():
         edges = cv2.Canny(masked_image, 50, 150, apertureSize = 3)
 
         # apply Hough Lines algorithm
-        lines = cv2.HoughLines(edges, 1, np.pi/180, 500)
+        lines = cv2.HoughLines(edges, 1, np.pi/180, 100)
 
         # definitions
         h, w = self.image.shape[:2]
