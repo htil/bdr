@@ -9,7 +9,7 @@ from geometry_msgs.msg import Twist
 class Controller():
     def __init__(self):
         rospy.init_node("controller", anonymous=True)
-    rospy.Subscriber("error", Float32, self.move_y)
+        rospy.Subscriber("error", Float32, self.move_y)
         self.takeoff_pub = rospy.Publisher("takeoff", Empty, queue_size=10)
         self.land_pub = rospy.Publisher("land", Empty, queue_size=10)
         self.velocity_pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
@@ -30,14 +30,14 @@ class Controller():
         self.velocity.linear.y = 0.25
     else:
         self.velocity.linear.y = -0.25
-    self.velocity_pub.publish(self.velocity)
+        self.velocity_pub.publish(self.velocity)
     
     def move_x(self):
-    self.velocity.linear.x = 1.0
-    self.velocity_pub.publish(self.velocity)
-    time.sleep(1)
-    self.velocity.linear.x = 0.0
-    self.velcity_pub.publish(self.velocity)
+        self.velocity.linear.x = 1.0
+        self.velocity_pub.publish(self.velocity)
+        time.sleep(1)
+        self.velocity.linear.x = 0.0
+        self.velcity_pub.publish(self.velocity)
 
 if __name__ == "__main__":
     bebop_controller = Controller()
@@ -50,8 +50,8 @@ if __name__ == "__main__":
             bebop_controller.takeoff()
         elif usr_input.lower() == "l":
             bebop_controller.land()
-    elif usr_input.lower() == "f":
-        bebop_controller.move_x()
+        elif usr_input.lower() == "f":
+            bebop_controller.move_x()
         elif usr_input.lower() == "q":
             bebop_controller.land()
             break
