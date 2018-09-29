@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ejsawyers/brain_drone_race_ws/src
+CMAKE_SOURCE_DIR = /home/ejsawyers/BDR/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ejsawyers/brain_drone_race_ws/build
+CMAKE_BINARY_DIR = /home/ejsawyers/BDR/build
 
 # Utility rule file for rosgraph_msgs_generate_messages_lisp.
 
@@ -63,10 +63,10 @@ bebop_brain_drone_race/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 .PHONY : bebop_brain_drone_race/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 
 bebop_brain_drone_race/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean:
-	cd /home/ejsawyers/brain_drone_race_ws/build/bebop_brain_drone_race && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/cmake_clean.cmake
+	cd /home/ejsawyers/BDR/build/bebop_brain_drone_race && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/cmake_clean.cmake
 .PHONY : bebop_brain_drone_race/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean
 
 bebop_brain_drone_race/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/depend:
-	cd /home/ejsawyers/brain_drone_race_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ejsawyers/brain_drone_race_ws/src /home/ejsawyers/brain_drone_race_ws/src/bebop_brain_drone_race /home/ejsawyers/brain_drone_race_ws/build /home/ejsawyers/brain_drone_race_ws/build/bebop_brain_drone_race /home/ejsawyers/brain_drone_race_ws/build/bebop_brain_drone_race/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ejsawyers/BDR/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ejsawyers/BDR/src /home/ejsawyers/BDR/src/bebop_brain_drone_race /home/ejsawyers/BDR/build /home/ejsawyers/BDR/build/bebop_brain_drone_race /home/ejsawyers/BDR/build/bebop_brain_drone_race/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : bebop_brain_drone_race/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/depend
 

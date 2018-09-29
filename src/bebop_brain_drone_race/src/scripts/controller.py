@@ -3,44 +3,48 @@
 #This is what will determine the bebop drone's direction and velocity from line error and EEG scans.
 import rospy
 from std_msgs.msg import Empty
-from std_msgs.msg import Float64
+from std_msgs.msg import Float32
 from geometry_msgs.msg import Twist
 import time 
 
 class Controller():
     def __init__(self):
         rospy.init_node("controller", anonymous=True)
-        rospy.Subscriber("error", Float32, self.move_y)
-        self.takeoff_pub = rospy.Publisher("takeoff", Empty, queue_size=10)
-        self.land_pub = rospy.Publisher("land", Empty, queue_size=10)
-        self.velocity_pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
+        rospy.Subscriber("/bebop/error", Float32, self.move_y)
+        self.takeoff_pub = rospy.Publisher("/bebop/takeoff", Empty, queue_size=10)
+        self.land_pub = rospy.Publisher("/bebop/land", Empty, queue_size=10)
+        self.velocity_pub = rospy.Publisher("/bebop/cmd_vel", Twist, queue_size=10)
         self.velocity = Twist()
+        self.in_air = False
 
     def takeoff(self):
+	self.in_air = True
         message = Empty()
         self.takeoff_pub.publish(message)
 
     def land(self):
+	self.in_air = False
         message = Empty()
         self.land_pub.publish(message)
 
     def move_y(self, data):
-        if data.data < 0:
-            self.velocity.linear.y = 0.25
-            self.vleocity_pub.publish(self.velocity)
-        elif data.data > 0:
-            self.velocity.linear.y = -0.25
-            self.velocity_pub.publish(self.velocity)
-        else:
-            self.velocity.linear.y = 0
-            self.velocity_pub.publish(self.velocity)
+        if self.in_air:
+            if data.data < 0:
+                self.velocity.linear.y = -0.10
+                self.velocity_pub.publish(self.velocity)
+            elif data.data > 0:
+                self.velocity.linear.y = 0.10
+                self.velocity_pub.publish(self.velocity)
+            else:
+                self.velocity.linear.y = 0
+                self.velocity_pub.publish(self.velocity)
     
     def move_x(self):
         self.velocity.linear.x = 1.0
         self.velocity_pub.publish(self.velocity)
         time.sleep(1)
         self.velocity.linear.x = 0.0
-        self.velcity_pub.publish(self.velocity)
+        self.velocity_pub.publish(self.velocity)
 
 if __name__ == "__main__":
     bebop_controller = Controller()

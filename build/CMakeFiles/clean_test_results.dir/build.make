@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ejsawyers/brain_drone_race_ws/src
+CMAKE_SOURCE_DIR = /home/ejsawyers/BDR/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ejsawyers/brain_drone_race_ws/build
+CMAKE_BINARY_DIR = /home/ejsawyers/BDR/build
 
 # Utility rule file for clean_test_results.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/ejsawyers/brain_drone_race_ws/build
 include CMakeFiles/clean_test_results.dir/progress.make
 
 CMakeFiles/clean_test_results:
-	/usr/bin/python /opt/ros/kinetic/share/catkin/cmake/test/remove_test_results.py /home/ejsawyers/brain_drone_race_ws/build/test_results
+	/usr/bin/python /opt/ros/kinetic/share/catkin/cmake/test/remove_test_results.py /home/ejsawyers/BDR/build/test_results
 
 clean_test_results: CMakeFiles/clean_test_results
 clean_test_results: CMakeFiles/clean_test_results.dir/build.make
@@ -71,6 +71,6 @@ CMakeFiles/clean_test_results.dir/clean:
 .PHONY : CMakeFiles/clean_test_results.dir/clean
 
 CMakeFiles/clean_test_results.dir/depend:
-	cd /home/ejsawyers/brain_drone_race_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ejsawyers/brain_drone_race_ws/src /home/ejsawyers/brain_drone_race_ws/src /home/ejsawyers/brain_drone_race_ws/build /home/ejsawyers/brain_drone_race_ws/build /home/ejsawyers/brain_drone_race_ws/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ejsawyers/BDR/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ejsawyers/BDR/src /home/ejsawyers/BDR/src /home/ejsawyers/BDR/build /home/ejsawyers/BDR/build /home/ejsawyers/BDR/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean_test_results.dir/depend
 

@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "bebop_brain_drone_race"
-PROJECT_SPACE_DIR = "/home/ejsawyers/brain_drone_race_ws/install"
+PROJECT_SPACE_DIR = "/home/ejsawyers/BDR/install"
 PROJECT_VERSION = "0.0.0"

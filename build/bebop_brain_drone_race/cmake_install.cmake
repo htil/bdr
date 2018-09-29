@@ -1,8 +1,8 @@
-# Install script for directory: /home/ejsawyers/brain_drone_race_ws/src/bebop_brain_drone_race
+# Install script for directory: /home/ejsawyers/BDR/src/bebop_brain_drone_race
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/ejsawyers/brain_drone_race_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/ejsawyers/BDR/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ejsawyers/brain_drone_race_ws/build/bebop_brain_drone_race/catkin_generated/installspace/bebop_brain_drone_race.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ejsawyers/BDR/build/bebop_brain_drone_race/catkin_generated/installspace/bebop_brain_drone_race.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bebop_brain_drone_race/cmake" TYPE FILE FILES
-    "/home/ejsawyers/brain_drone_race_ws/build/bebop_brain_drone_race/catkin_generated/installspace/bebop_brain_drone_raceConfig.cmake"
-    "/home/ejsawyers/brain_drone_race_ws/build/bebop_brain_drone_race/catkin_generated/installspace/bebop_brain_drone_raceConfig-version.cmake"
+    "/home/ejsawyers/BDR/build/bebop_brain_drone_race/catkin_generated/installspace/bebop_brain_drone_raceConfig.cmake"
+    "/home/ejsawyers/BDR/build/bebop_brain_drone_race/catkin_generated/installspace/bebop_brain_drone_raceConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bebop_brain_drone_race" TYPE FILE FILES "/home/ejsawyers/brain_drone_race_ws/src/bebop_brain_drone_race/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bebop_brain_drone_race" TYPE FILE FILES "/home/ejsawyers/BDR/src/bebop_brain_drone_race/package.xml")
 endif()
 

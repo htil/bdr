@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="namespace" default="bebop" />
+    <group ns="$(arg namespace)">
+        <node pkg="bebop_brain_drone_race" name="$(anon controller)" type="controller.py"></node>
+        <node pkg="bebop_brain_drone_race" name="$(anon sensor)" type="sensor.py"></node>
+    </group>
+</launch>
