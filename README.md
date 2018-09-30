@@ -24,7 +24,7 @@ $ catkin_make
 $ source devel/setup.bash
 ```
 
-## Running the Code
+### Running the Code
 
 Open a terminal and launch the bebop_driver.
 
