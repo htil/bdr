@@ -11,7 +11,7 @@ class Sensor():
         rospy.Subscriber("/bebop/image_raw", Image, self.calculate_error)
         self.error_publisher = rospy.Publisher("/bebop/error", Float32, queue_size=10) 
         self.error = 0
-	self.line_error = LineError()
+        self.line_error = LineError()
     
     def calculate_error(self, image):
         # Convert bebop image to compatible OpenCv image type
@@ -21,7 +21,7 @@ class Sensor():
         except CvBridgeError, e:
             print(e)
 
-        self.error = self.line_error.GetError(img)
+        self.error = self.line_error.get_error(img)
 
     def run(self):  
         rate = rospy.Rate(10)

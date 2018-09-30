@@ -37,8 +37,8 @@ class LineError():
         midpoint = (self.image.shape[1])/2
 
         # determine if the average x value is less than or greater than the midpoint
-        # 100px of "leeway" for determining if the line is centered
-        if (midpoint - 100) <= average_x <= (midpoint + 100):
+        # 25px of "leeway" for determining if the line is centered
+        if (midpoint - 25) <= average_x <= (midpoint + 25):
             self.error = 0
         elif average_x < midpoint:
             self.error = -1
@@ -56,7 +56,7 @@ class LineError():
         
         Returns:
            -1 if the average x value is to the left of the midpoint of the image.
-            0 if the average x value is centered with the midpoint of the image (100px of leeway). 
+            0 if the average x value is centered with the midpoint of the image (25px of leeway). 
             1 if the average x value is to the right of the midpoint of the image.
         '''
         self.image = image
