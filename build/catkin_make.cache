@@ -1,2 +1,0 @@
-bebop_brain_drone_race
--DCATKIN_DEVEL_PREFIX=/home/ejsawyers/BDR/devel -DCMAKE_INSTALL_PREFIX=/home/ejsawyers/BDR/install -G Unix Makefiles
