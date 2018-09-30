@@ -1,11 +1,13 @@
 # Brain Drone Race
 
+The purpose of this code is to keep a bebop drone centered on a red line, and move the drone forward (linear x) based on EEG data).
+
 ## Getting Started
 
 Clone this repository on your local machine.
 
 '''
-git clone https://github.com/htil/BDR.git
+$ git clone https://github.com/htil/BDR.git
 '''
 
 ### Prerequisites
@@ -32,13 +34,13 @@ Open a terminal and launch the bebop_driver.
 $ roslaunch bebop_driver bebop_node.launch
 ```
 
-Open a new terminal and run the sensor node.
+Open a new terminal and run the sensor node (devel/setup.bash will have to be sourced again).
 
 ```
 $ rosrun bebop_brain_drone_race sensor.py
 ```
 
-Open a new terminal and run the controller node.
+Open a new terminal and run the controller node (devel/setup.bash will have to be sourced again).
 
 ```
 $ rosrun bebop_brain_drone_race controller.py
