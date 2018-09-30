@@ -6,9 +6,9 @@ The purpose of this code is to keep a bebop drone centered on a red line, and mo
 
 Clone this repository on your local machine.
 
-'''
+```
 $ git clone https://github.com/htil/BDR.git
-'''
+```
 
 ### Prerequisites
 
