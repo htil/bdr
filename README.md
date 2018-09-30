@@ -1,6 +1,6 @@
 # Brain Drone Race
 
-The purpose of this code is to keep a bebop drone centered on a red line, and move the drone forward (linear x) based on EEG data).
+The purpose of this code is to keep a bebop drone centered on a red line, and move the drone forward (linear x) based on EEG data.
 
 ## Getting Started
 
