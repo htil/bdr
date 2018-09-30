@@ -1,74 +1,64 @@
 #!/usr/bin/env python
 import cv2
 import numpy as np
-from math import sqrt, atan
 
 class LineError():
     def __init__(self, debug = 0):
-        self.delta = 0
+        self.error = 0
         self.image = None
-        self.debug = debug
 
-    def CalcError(self):
-        # apply a Gaussian blur and convert to an HLS image
-        blur = cv2.blur(self.image,(5,5))
-        hls  = cv2.cvtColor(blur, cv2.COLOR_RGB2HLS)
+    def calc_error(self):
+        ''' 
+        This method calculates the whether the average x value of a red line is to the left,
+        right, or centered with the midpoint of an image.
 
-        # apply a color filter
-        lower_range = np.array([100, 100, 65], dtype=np.uint8)
-        upper_range = np.array([255, 255, 255], dtype=np.uint8)
-        mask = cv2.inRange(hls, lower_range, upper_range)
-        masked_image = cv2.bitwise_and(self.image, self.image, mask=mask)
+        Args:
+            None
+        
+        Returns:
+           None
+        '''
+        # convert to an HLS image
+        hls  = cv2.cvtColor(self.image, cv2.COLOR_RGB2HLS)
 
-        # apply Canny Edge Detection
-        edges = cv2.Canny(masked_image, 50, 150, apertureSize = 3)
+        # filter by red
+        lower_range = np.array([0,100,100], dtype=np.uint8)
+        upper_range = np.array([125,200,200], dtype=np.uint8)
+        filtered_image = cv2.inRange(hls, lower_range, upper_range)
+        cv2.imwrite("images/mask.jpg", filtered_image)
 
-        # apply Hough Lines algorithm
-        lines = cv2.HoughLines(edges, 1, np.pi/180, 100)
+        # grab the x-values of the edge points
+        x_values = np.where(filtered_image == 255)[1]
 
-        # definitions
-        h, w = self.image.shape[:2]
-        x1s, y1s, x2s, y2s = [], [], [], []
+        # calculate the average of the x values
+        average_x = np.average(x_values)
 
-        # parse results for the two most prominent lines
-        if lines is not None:
-            for line in lines[:2]:
-                a = np.cos(line[0][1])
-                b = np.sin(line[0][1])
-                x0 = a*line[0][0]
-                y0 = b*line[0][0]
+        # grab the midpoint x-value of the image
+        midpoint = (self.image.shape[1])/2
 
-                x1 = int(x0 + 100000*(-b))
-                y1 = int(y0 + 100000*(a))
-                x2 = int(x0 - 100000*(-b))
-                y2 = int(y0 - 100000*(a))
+        # determine if the average x value is less than or greater than the midpoint
+        # 100px of "leeway" for determining if the line is centered
+        if (midpoint - 100) <= average_x <= (midpoint + 100):
+            self.error = 0
+        elif average_x < midpoint:
+            self.error = -1
+        elif average_x > midpoint:
+            self.error = 1
+        else:
+            pass
 
-                if(self.debug == 1):
-                    cv2.line(self.image,(x1,y1),(x2,y2),(0,255,0),5)
+    def get_error(self, image):
+        '''
+        This method returns whether a red line is fixed to the right, left, or centered in an image.
 
-                x1s.append(x1)
-                y1s.append(y1)
-                x2s.append(x2)
-                y2s.append(y2)
-
-            # calculate the value of delta
-            x1 = sum(x1s)//len(x1s)
-            x2 = sum(x2s)//len(x2s)
-            y1 = sum(y1s)//len(y1s)
-            y2 = sum(y2s)//len(y2s)
-
-
-            if(x1 > w/2):
-                self.delta = -1
-            elif(x1 < w/2):
-                self.delta = 1
-            else:
-                self.delta = 0
-
-    def GetError(self, image):
+        Args:
+            Arg1: An image read in with cv2.imread(...)
+        
+        Returns:
+           -1 if the average x value is to the left of the midpoint of the image.
+            0 if the average x value is centered with the midpoint of the image (100px of leeway). 
+            1 if the average x value is to the right of the midpoint of the image.
+        '''
         self.image = image
-        self.CalcError()
-        return self.delta
-
-    def GetImage(self):
-        return self.image
+        self.calc_error()
+        return self.error

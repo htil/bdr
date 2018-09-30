@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-
-#This is what will determine the bebop drone's direction and velocity from line error and EEG scans.
 import rospy
 from std_msgs.msg import Empty
 from std_msgs.msg import Float32
