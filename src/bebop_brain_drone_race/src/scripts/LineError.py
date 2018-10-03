@@ -4,17 +4,17 @@ import numpy as np
 
 class LineError():
     def __init__(self, debug = 0):
-        self.error = 0
+        self.error = [0, 0]
         self.image = None
 
     def calc_error(self):
-        ''' 
+        '''
         This method calculates the whether the average x value of a red line is to the left,
         right, or centered with the midpoint of an image.
 
         Args:
             None
-        
+
         Returns:
            None
         '''
@@ -30,22 +30,18 @@ class LineError():
         # grab the x-values of the edge points
         x_values = np.where(filtered_image == 255)[1]
 
+        # grab the first and last x_values
+        x1 = x_values[0]
+        x2 = x_values[-1]
+
         # calculate the average of the x values
         average_x = np.average(x_values)
 
         # grab the midpoint x-value of the image
         midpoint = (self.image.shape[1])/2
 
-        # determine if the average x value is less than or greater than the midpoint
-        # 25px of "leeway" for determining if the line is centered
-        if (midpoint - 25) <= average_x <= (midpoint + 25):
-            self.error = 0
-        elif average_x < midpoint:
-            self.error = -1
-        elif average_x > midpoint:
-            self.error = 1
-        else:
-            pass
+        # Return the error
+        self.error = [average_x - midpoint, x2-x1]
 
     def get_error(self, image):
         '''
@@ -53,10 +49,10 @@ class LineError():
 
         Args:
             Arg1: An image read in with cv2.imread(...)
-        
+
         Returns:
            -1 if the average x value is to the left of the midpoint of the image.
-            0 if the average x value is centered with the midpoint of the image (25px of leeway). 
+            0 if the average x value is centered with the midpoint of the image (25px of leeway).
             1 if the average x value is to the right of the midpoint of the image.
         '''
         self.image = image
