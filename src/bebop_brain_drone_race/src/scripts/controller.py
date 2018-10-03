@@ -14,7 +14,7 @@ class Controller():
         self.velocity_pub = rospy.Publisher("/bebop/cmd_vel", Twist, queue_size=10)
         self.velocity = Twist()
         self.in_air = False
-        self.Kp_y = 0.0004
+        self.Kp_y = 0.0002
 
     def takeoff(self):
         self.in_air = True
@@ -29,7 +29,7 @@ class Controller():
     def move_y(self, data):
         if self.in_air:
                 # multiply the error by a constant factor
-                self.velocity.linear.y = (self.Kp_y * data.data)
+                self.velocity.linear.y = -(self.Kp_y * data.data)
                 if self.velocity.linear.y > 0.1:
                     self.velocity.linear.y = 0.1
                 elif self.velocity.linear.y < -0.1:

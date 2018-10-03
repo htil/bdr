@@ -8,13 +8,13 @@ class LineError():
         self.image = None
 
     def calc_error(self):
-        ''' 
+        '''
         This method calculates the whether the average x value of a red line is to the left,
         right, or centered with the midpoint of an image.
 
         Args:
             None
-        
+
         Returns:
            None
         '''
@@ -37,7 +37,7 @@ class LineError():
         midpoint = (self.image.shape[1])/2
 
         # Return the error
-        return average_x - midpoint
+        self.error = average_x - midpoint
 
     def get_error(self, image):
         '''
@@ -45,10 +45,10 @@ class LineError():
 
         Args:
             Arg1: An image read in with cv2.imread(...)
-        
+
         Returns:
            -1 if the average x value is to the left of the midpoint of the image.
-            0 if the average x value is centered with the midpoint of the image (25px of leeway). 
+            0 if the average x value is centered with the midpoint of the image (25px of leeway).
             1 if the average x value is to the right of the midpoint of the image.
         '''
         self.image = image
