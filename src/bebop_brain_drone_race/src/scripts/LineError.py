@@ -4,7 +4,7 @@ import numpy as np
 
 class LineError():
     def __init__(self, debug = 0):
-        self.error = 0
+        self.error = [0, 0]
         self.image = None
 
     def calc_error(self):
@@ -30,6 +30,10 @@ class LineError():
         # grab the x-values of the edge points
         x_values = np.where(filtered_image == 255)[1]
 
+        # grab the first and last x_values
+        x1 = x_values[0]
+        x2 = x_values[-1]
+
         # calculate the average of the x values
         average_x = np.average(x_values)
 
@@ -37,7 +41,7 @@ class LineError():
         midpoint = (self.image.shape[1])/2
 
         # Return the error
-        self.error = average_x - midpoint
+        self.error = [average_x - midpoint, x2-x1]
 
     def get_error(self, image):
         '''
