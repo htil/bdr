@@ -27,14 +27,12 @@ class Controller():
 
     def move_y(self, data):
         if self.in_air:
-            if data.data < 0:
-                self.velocity.linear.y = 0.10
-                self.velocity_pub.publish(self.velocity)
-            elif data.data > 0:
-                self.velocity.linear.y = -0.10
-                self.velocity_pub.publish(self.velocity)
-            else:
-                self.velocity.linear.y = 0
+                # multiply the error by a constant factor 
+                self.velocity.linear.y = (data.data * (1/4000))
+                if self.velocity.linear.y > 0.1:
+                    self.velocity.linear.y = 0.1
+                elif self.velocity.linear.y > 0.1:
+                    self.velocity.linear.y = -0.1
                 self.velocity_pub.publish(self.velocity)
 
     def on_press(self, key):

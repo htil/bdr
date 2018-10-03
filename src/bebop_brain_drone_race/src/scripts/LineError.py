@@ -36,16 +36,8 @@ class LineError():
         # grab the midpoint x-value of the image
         midpoint = (self.image.shape[1])/2
 
-        # determine if the average x value is less than or greater than the midpoint
-        # 25px of "leeway" for determining if the line is centered
-        if (midpoint - 25) <= average_x <= (midpoint + 25):
-            self.error = 0
-        elif average_x < midpoint:
-            self.error = -1
-        elif average_x > midpoint:
-            self.error = 1
-        else:
-            pass
+        # Return the error
+        return average_x - midpoint
 
     def get_error(self, image):
         '''
