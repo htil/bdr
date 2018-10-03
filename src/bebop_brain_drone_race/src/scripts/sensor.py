@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 from sensor_msgs.msg import Image
-from std_msgs.msg import Float32
+from bebop_brain_drone_race.msg import Error
 from LineError import LineError
 from cv_bridge import CvBridge, CvBridgeError
 
@@ -9,8 +9,8 @@ class Sensor():
     def __init__(self):
         rospy.init_node("sensor", anonymous=True)
         rospy.Subscriber("/bebop/image_raw", Image, self.calculate_error)
-        self.error_publisher = rospy.Publisher("/bebop/error", Float32, queue_size=10) 
-        self.error = 0
+        self.error_publisher = rospy.Publisher("/bebop/error", Error, queue_size=10) 
+        self.error = Error()
         self.line_error = LineError()
     
     def calculate_error(self, image):
@@ -21,7 +21,7 @@ class Sensor():
         except CvBridgeError, e:
             print(e)
 
-        self.error = self.line_error.get_error(img)
+        self.error.y, self.error.z = self.line_error.get_error(img)
 
     def run(self):  
         rate = rospy.Rate(10)
