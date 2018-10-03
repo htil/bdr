@@ -29,7 +29,7 @@ class Controller():
     def move_y(self, data):
         if self.in_air:
                 # multiply the error by a constant factor
-                self.velocity.linear.y = (Kp_y * data.data)
+                self.velocity.linear.y = (self.Kp_y * data.data)
                 if self.velocity.linear.y > 0.1:
                     self.velocity.linear.y = 0.1
                 elif self.velocity.linear.y < -0.1:
