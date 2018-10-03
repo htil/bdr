@@ -1,8 +1,0 @@
-prefix=/home/ejsawyers/BDR/install
-
-Name: bebop_brain_drone_race
-Description: Description of bebop_brain_drone_race
-Version: 0.0.0
-Cflags: -I/home/ejsawyers/BDR/install/include
-Libs: -L/home/ejsawyers/BDR/install/lib 
-Requires: 
