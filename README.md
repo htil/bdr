@@ -28,9 +28,10 @@ $ source devel/setup.bash
 
 ### Running the Code
 
-Open a terminal and launch the bebop_driver.
+Open a terminal, navigate to the bebop_driver workspace and launch it.
 
 ```
+$ source devel/setup.bash
 $ roslaunch bebop_driver bebop_node.launch
 ```
 
