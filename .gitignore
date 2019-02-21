@@ -1,8 +1,5 @@
 *.pyc
 .catkin_tools
 .catkin_workspace
-build/
-devel/
-install/
 
 .DS_Store
