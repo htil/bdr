@@ -48,7 +48,7 @@ window.Device = new Bluetooth.BCIDevice((sample) => {
     //console.log(weighted.engagement);
 
     if (window.gameInstance.__ready == true) {
-        console.log("gameInstance ready", weighted.engagement)
+        //console.log("gameInstance ready", weighted.engagement)
         window.gameInstance.SendMessage("Drone", "SetSpeed", weighted.engagement);
     }
 });
@@ -64,8 +64,7 @@ let connect = async() => {
             },
           }});
     } catch (e) {
-
+        console.log("connect/load error. retrying...");
+        connect();
     }
 }
-
-//setTimeout(connect, 1000);
