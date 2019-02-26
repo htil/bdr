@@ -9,29 +9,27 @@ from std_srvs.srv import Empty
 import random
 
 class RealEnvROS2(gym.Env):
-    """Superclass for all Gazebo environments.
+    """
+    Superclass for all Gazebo environments.
     """
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
-
-        # Launch the simulation with the given launchfile name
+        # launch the simulation with the given launchfile name
         rclpy.init(args=None)
         self.node = rclpy.create_node('real_env_ros2')
 
     def step(self, action):
-
-        # Implement this method in every subclass
-        # Perform a step in gazebo. E.g. move the robot
+        # implement this method in every subclass
         raise NotImplementedError
 
     def reset(self):
-
-        # Implemented in subclass
+        # implement this method in every subclass
         raise NotImplementedError
 
     def render(self, mode=None,  close=False):
         pass
+
     def _render(self, mode=None,  close=False):
         self._close()
 
@@ -45,13 +43,9 @@ class RealEnvROS2(gym.Env):
         pass
 
     def _configure(self):
-
-        # TODO
-        # From OpenAI API: Provides runtime configuration to the enviroment
-        # Maybe set the Real Time Factor?
         pass
+
     def _seed(self):
-
-        # TODO
-        # From OpenAI API: Sets the seed for this env's random number generator(s)
         pass
+
+# completed: lcb 02/26/19 11:58:00 AM

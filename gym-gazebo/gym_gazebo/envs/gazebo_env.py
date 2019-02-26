@@ -1,6 +1,5 @@
 import gym
 import rospy
-#import roslaunch
 import sys
 import os
 import signal
@@ -11,7 +10,8 @@ import random
 from rosgraph_msgs.msg import Clock
 
 class GazeboEnv(gym.Env):
-    """Superclass for all Gazebo environments.
+    """
+    Superclass for all Gazebo environments.
     """
     metadata = {'render.modes': ['human']}
 
@@ -19,29 +19,16 @@ class GazeboEnv(gym.Env):
         self.last_clock_msg = Clock()
 
         random_number = random.randint(10000, 15000)
-        # self.port = "11311"#str(random_number) #os.environ["ROS_PORT_SIM"]
-        # self.port_gazebo = "11345"#str(random_number+1) #os.environ["ROS_PORT_SIM"]
-        self.port = str(random_number) #os.environ["ROS_PORT_SIM"]
-        self.port_gazebo = str(random_number+1) #os.environ["ROS_PORT_SIM"]
+        self.port = str(random_number)
+        self.port_gazebo = str(random_number+1)
 
         os.environ["ROS_MASTER_URI"] = "http://localhost:"+self.port
         os.environ["GAZEBO_MASTER_URI"] = "http://localhost:"+self.port_gazebo
-        #
-        # self.ros_master_uri = os.environ["ROS_MASTER_URI"];
 
         print("ROS_MASTER_URI=http://localhost:"+self.port + "\n")
         print("GAZEBO_MASTER_URI=http://localhost:"+self.port_gazebo + "\n")
 
-        # self.port = os.environ.get("ROS_PORT_SIM", "11311")
         ros_path = os.path.dirname(subprocess.check_output(["which", "roscore"]))
-
-        # NOTE: It doesn't make sense to launch a roscore because it will be done when spawing Gazebo, which also need
-        #   to be the first node in order to initialize the clock.
-        # # start roscore with same python version as current script
-        # self._roscore = subprocess.Popen([sys.executable, os.path.join(ros_path, b"roscore"), "-p", self.port])
-        # time.sleep(1)
-        # print ("Roscore launched!")
-
 
         if launchfile.startswith("/"):
             fullpath = launchfile
@@ -58,47 +45,15 @@ class GazeboEnv(gym.Env):
         # Launch the simulation with the given launchfile name
         rospy.init_node('gym', anonymous=True)
 
-        ################################################################################################################
-        # r = rospy.Rate(1)
-        # self.clock_sub = rospy.Subscriber('/clock', Clock, self.callback, queue_size=1000000)
-        # while not rospy.is_shutdown():
-        #     print("initialization: ", rospy.rostime.is_rostime_initialized())
-        #     print("Wallclock: ", rospy.rostime.is_wallclock())
-        #     print("Time: ", time.time())
-        #     print("Rospyclock: ", rospy.rostime.get_rostime().secs)
-        #     # print("/clock: ", str(self.last_clock_msg))
-        #     last_ros_time_ = self.last_clock_msg
-        #     print("Clock:", last_ros_time_)
-        #     # print("Waiting for synch with ROS clock")
-        #     # if wallclock == False:
-        #     #     break
-        #     r.sleep()
-        ################################################################################################################
-
-    # def callback(self, message):
-    #     """
-    #     Callback method for the subscriber of the clock topic
-    #     :param message:
-    #     :return:
-    #     """
-    #     # self.last_clock_msg = int(str(message.clock.secs) + str(message.clock.nsecs)) / 1e6
-    #     # print("Message", message)
-    #     self.last_clock_msg = message
-    #     # print("Message", message)
-
     def step(self, action):
-
-        # Implement this method in every subclass
-        # Perform a step in gazebo. E.g. move the robot
+        # implement this method in every subclass
         raise NotImplementedError
 
     def reset(self):
-
-        # Implemented in subclass
+         # implement this method in every subclass
         raise NotImplementedError
 
     def _render(self, mode="human", close=False):
-
         if close:
             tmp = os.popen("ps -Af").read()
             proccount = tmp.count('gzclient')
@@ -117,8 +72,7 @@ class GazeboEnv(gym.Env):
             self.gzclient_pid = 0
 
     def _close(self):
-
-        # Kill gzclient, gzserver and roscore
+        # kill gzclient, gzserver and roscore
         tmp = os.popen("ps -Af").read()
         gzclient_count = tmp.count('gzclient')
         gzserver_count = tmp.count('gzserver')
@@ -138,13 +92,9 @@ class GazeboEnv(gym.Env):
             os.wait()
 
     def _configure(self):
-
-        # TODO
-        # From OpenAI API: Provides runtime configuration to the enviroment
-        # Maybe set the Real Time Factor?
         pass
-    def _seed(self):
 
-        # TODO
-        # From OpenAI API: Sets the seed for this env's random number generator(s)
+    def _seed(self):    
         pass
+
+# completed: lcb 02/26/19 11:47:00 AM
