@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+<model name="bdr_track">
+  <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>4.0 6.0</size>
+          </plane>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>4.0 6.0</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://bdr_track/materials/scripts</uri>
+            <uri>model://bdr_track/materials/textures</uri>
+            <name>BdrTrack/Image</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
