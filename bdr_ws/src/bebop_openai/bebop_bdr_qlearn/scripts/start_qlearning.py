@@ -15,14 +15,14 @@ if __name__ == '__main__':
 
     # Create the Gym environment
     env = gym.make('BebopBdr-v0')
-    rospy.loginfo("Gym environment done")
+    rospy.logwarn("Gym environment done")
 
     # Set the logging system
     rospack = rospkg.RosPack()
     pkg_path = rospack.get_path('bebop_bdr_qlearn')
     outdir = pkg_path + '/training_results'
     env = wrappers.Monitor(env, outdir, force=True)
-    rospy.loginfo("Monitor Wrapper started")
+    rospy.logwarn("Monitor Wrapper started")
 
     last_time_steps = numpy.ndarray(0)
 

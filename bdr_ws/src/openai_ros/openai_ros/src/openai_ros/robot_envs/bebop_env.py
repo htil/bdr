@@ -1,7 +1,7 @@
 import numpy
 import rospy
 import time
-from openai_ros import robot_gazebo_env
+import ros_env
 from std_msgs.msg import Float64
 from sensor_msgs.msg import JointState
 from sensor_msgs.msg import Image
@@ -17,7 +17,7 @@ from std_msgs.msg import Empty
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
 
-class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
+class BebopEnv(ros_env.IrlBebopEnv):
 
     def __init__(self):
         """
@@ -47,7 +47,6 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
                                             start_init_physics_parameters=False,
                                             reset_world_or_sim="WORLD")
 
-        self.gazebo.unpauseSim()
         #self.controllers_object.reset_controllers()
         self._check_all_sensors_ready()
 
@@ -58,7 +57,6 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
         self._land_pub = rospy.Publisher('/bebop/land', Empty, queue_size=1)
 
         self._check_all_publishers_ready()
-        self.gazebo.pauseSim()
         
         rospy.logdebug("Finished Bebop2Env Init...")
 
@@ -74,7 +72,7 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
         return True
 
     def _check_all_sensors_ready(self):
-        rospy.logdebug("START SENSOR CHECK")
+        rospy.logwarn("START SENSOR CHECK")
         self._check_camera_image_raw_ready()
         rospy.logdebug("ALL SENSORS READY")
         

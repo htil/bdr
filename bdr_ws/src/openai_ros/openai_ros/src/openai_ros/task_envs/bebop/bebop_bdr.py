@@ -11,7 +11,7 @@ timestep_limit_per_episode = 10000
 
 register(
         id='BebopBdr-v0',
-        entry_point='openai_ros:task_envs.bebop.bebop_bdr.Bebop2Env',
+        entry_point='bebop_training:src.scripts.bebop_bdr.Bebop2BdrEnv',
         timestep_limit=timestep_limit_per_episode,
     )
 
@@ -21,7 +21,7 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         self.cumulated_steps = 0.0
 
         # init the drone
-        super(Bebop2Env, self).__init__()
+        super(Bebop2BdrEnv, self).__init__()
 
     def _set_init_pose(self):
         self.land()
