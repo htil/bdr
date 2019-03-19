@@ -7,7 +7,7 @@ import qlearn
 from gym import wrappers
 import rospy
 import rospkg
-from openai_ros.task_envs.bebop import bebop_bdr
+import bebop_bdr
 
 
 if __name__ == '__main__':
@@ -108,5 +108,6 @@ if __name__ == '__main__':
     # print("Parameters: a="+str)
     rospy.loginfo("Overall score: {:0.2f}".format(last_time_steps.mean()))
     rospy.loginfo("Best 100 score: {:0.2f}".format(reduce(lambda x, y: x + y, l[-100:]) / len(l[-100:])))
-
+'''
     env.close()
+

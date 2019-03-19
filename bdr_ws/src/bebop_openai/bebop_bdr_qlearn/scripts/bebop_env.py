@@ -1,7 +1,9 @@
 import numpy
 import rospy
 import time
-import ros_env
+
+from openai_ros import robot_gazebo_env
+
 from std_msgs.msg import Float64
 from sensor_msgs.msg import JointState
 from sensor_msgs.msg import Image
@@ -17,7 +19,7 @@ from std_msgs.msg import Empty
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
 
-class BebopEnv(ros_env.IrlBebopEnv):
+class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
 
     def __init__(self):
         """

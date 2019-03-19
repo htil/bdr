@@ -1,7 +1,8 @@
 import rospy
 import numpy
 from gym import spaces
-from openai_ros.robot_envs import bebop_env
+import bebop_env
+
 from gym.envs.registration import register
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Vector3
@@ -11,7 +12,7 @@ timestep_limit_per_episode = 10000
 
 register(
         id='BebopBdr-v0',
-        entry_point='bebop_training:src.scripts.bebop_bdr.Bebop2BdrEnv',
+        entry_point='bebop_bdr:Bebop2BdrEnv',
         timestep_limit=timestep_limit_per_episode,
     )
 
