@@ -1,0 +1,21 @@
+<package>
+  <name>bebop_training</name>
+  <version>0.0.1</version>
+  <description>bebop_training module</description>
+  <maintainer email="lcbentley@crimson.ua.edu">Landon Bentley</maintainer>
+
+  <license>BSD</license>
+
+  <author email="lcbentley@crimson.ua.edu">Landon Bentley</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+
+
+  <!-- Dependencies needed after this package is compiled. -->
+
+  <!-- Dependencies needed only for running tests. -->
+
+</package>
