@@ -1,7 +1,7 @@
 import rospy
 import numpy
 from gym import spaces
-from openai_ros.robot_envs import parrotdrone_env
+from openai_ros.robot_envs import bebop_env
 from gym.envs.registration import register
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Vector3
@@ -15,7 +15,7 @@ register(
         timestep_limit=timestep_limit_per_episode,
     )
 
-class Bebop2BdrEnv(bebop2_env.Bebop2Env):
+class Bebop2BdrEnv(bebop_env.Bebop2Env):
     def __init__(self):
         # set variables
         self.cumulated_steps = 0.0

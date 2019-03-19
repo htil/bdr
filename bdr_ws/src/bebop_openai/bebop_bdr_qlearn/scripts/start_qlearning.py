@@ -7,7 +7,7 @@ import qlearn
 from gym import wrappers
 import rospy
 import rospkg
-from openai_ros.task_envs.bebop2 import bebop2_bdr_relay
+from openai_ros.task_envs.bebop import bebop_bdr
 
 
 if __name__ == '__main__':
@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     highest_reward = 0
-
+    '''
     # Starts the main training loop: the one about the episodes to do
     for x in range(nepisodes):
         rospy.logdebug("############### START EPISODE=>" + str(x))
