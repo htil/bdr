@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 import gym
-import numpy
+import numpy as np
 import time
 import qlearn
-from gym import wrappers
+from gym import wrappers, spaces
 import rospy
 import rospkg
 import bebop_bdr
@@ -24,18 +24,15 @@ if __name__ == '__main__':
     env = wrappers.Monitor(env, outdir, force=True)
     rospy.logwarn("Monitor Wrapper started")
 
-    last_time_steps = numpy.ndarray(0)
+    last_time_steps = np.ndarray(0)
 
     # Loads parameters from the ROS param server
-    # Parameters are stored in a yaml file inside the config directory
-    # They are loaded at runtime by the launch file
     Alpha = rospy.get_param("/bebop/alpha")
     Epsilon = rospy.get_param("/bebop/epsilon")
     Gamma = rospy.get_param("/bebop/gamma")
     epsilon_discount = rospy.get_param("/bebop/epsilon_discount")
     nepisodes = rospy.get_param("/bebop/nepisodes")
     nsteps = rospy.get_param("/bebop/nsteps")
-
     running_step = rospy.get_param("/bebop/running_step")
 
     # Initializes the algorithm that we are going to use for learning
@@ -45,13 +42,13 @@ if __name__ == '__main__':
 
     start_time = time.time()
     highest_reward = 0
-    '''
-    # Starts the main training loop: the one about the episodes to do
-    for x in range(nepisodes):
-        rospy.logdebug("############### START EPISODE=>" + str(x))
+
+	for x in range(nepisodes):
+        rospy.logwarn("############### START EPISODE " + str(x) + " ###############")
 
         cumulated_reward = 0
         done = False
+
         if qlearn.epsilon > 0.05:
             qlearn.epsilon *= epsilon_discount
 
@@ -59,16 +56,17 @@ if __name__ == '__main__':
         observation = env.reset()
         state = ''.join(map(str, observation))
 
-        # for each episode, we test the robot for nsteps
         for i in range(nsteps):
-            rospy.logwarn("############### Start Step=>" + str(i))
-            # Pick an action based on the current state
+            rospy.logwarn("############### START STEP " + str(i) + " ###############")
+    
             action = qlearn.chooseAction(state)
             rospy.logwarn("Next action is:%d", action)
+
             # Execute the action in the environment and get feedback
             observation, reward, done, info = env.step(action)
 
             rospy.logwarn(str(observation) + " " + str(reward))
+
             cumulated_reward += reward
             if highest_reward < cumulated_reward:
                 highest_reward = cumulated_reward
@@ -81,6 +79,7 @@ if __name__ == '__main__':
             rospy.logwarn("# reward that action gave=>" + str(reward))
             rospy.logwarn("# episode cumulated_reward=>" + str(cumulated_reward))
             rospy.logwarn("# State in which we will start next step=>" + str(nextState))
+
             qlearn.learn(state, action, reward, nextState)
 
             if not (done):
@@ -90,24 +89,18 @@ if __name__ == '__main__':
                 rospy.logwarn("DONE")
                 last_time_steps = numpy.append(last_time_steps, [int(i + 1)])
                 break
-            rospy.logwarn("############### END Step=>" + str(i))
-            #raw_input("Next Step...PRESS KEY")
+
+            rospy.logwarn("############### END STEP " + str(i) + " ###############")
+            
+			#raw_input("Next Step...PRESS KEY")
             # rospy.sleep(2.0)
+
         m, s = divmod(int(time.time() - start_time), 60)
         h, m = divmod(m, 60)
         rospy.logerr(("EP: " + str(x + 1) + " - [alpha: " + str(round(qlearn.alpha, 2)) + " - gamma: " + str(
             round(qlearn.gamma, 2)) + " - epsilon: " + str(round(qlearn.epsilon, 2)) + "] - Reward: " + str(
             cumulated_reward) + "     Time: %d:%02d:%02d" % (h, m, s)))
 
-    rospy.loginfo(("\n|" + str(nepisodes) + "|" + str(qlearn.alpha) + "|" + str(qlearn.gamma) + "|" + str(
-        initial_epsilon) + "*" + str(epsilon_discount) + "|" + str(highest_reward) + "| PICTURE |"))
 
-    l = last_time_steps.tolist()
-    l.sort()
-
-    # print("Parameters: a="+str)
-    rospy.loginfo("Overall score: {:0.2f}".format(last_time_steps.mean()))
-    rospy.loginfo("Best 100 score: {:0.2f}".format(reduce(lambda x, y: x + y, l[-100:]) / len(l[-100:])))
-'''
     env.close()
 

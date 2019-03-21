@@ -1,5 +1,5 @@
 import rospy
-import numpy
+import numpy as np
 from gym import spaces
 import bebop_env
 
@@ -19,17 +19,14 @@ register(
 class Bebop2BdrEnv(bebop_env.Bebop2Env):
     def __init__(self):
         # set variables
+	self._init_env_variables()
         self.cumulated_steps = 0.0
 
         # init the drone
         super(Bebop2BdrEnv, self).__init__()
 
-    def _set_init_pose(self):
-        self.land()
-        return True
-
     def _init_env_variables(self):
-        self.takeoff()
+        #self.takeoff()
         self.cumulated_reward = 0.0        
 
     def _set_action(self, action):
@@ -50,6 +47,8 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
             episode_done = False
 
         if episode_done:
+            rospy.logwarn("Action Taken: Land")
+            self.land()
             rospy.logerr("episode_done: " + str(episode_done) + "=>")
         else:
             rospy.logwarn("episode_done: "+str(episode_done) + "=>")

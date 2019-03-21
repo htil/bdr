@@ -1,8 +1,8 @@
-import numpy
+import numpy as np
 import rospy
 import time
 
-from openai_ros import robot_gazebo_env
+import robot_ros_env
 
 from std_msgs.msg import Float64
 from sensor_msgs.msg import JointState
@@ -18,8 +18,9 @@ from std_msgs.msg import Empty
 
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
+from gym import spaces
 
-class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
+class Bebop2Env(robot_ros_env.RobotRosEnv):
 
     def __init__(self):
         """
@@ -33,14 +34,15 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
         * /bebop/takeoff: publish a takeoff command
         * /bebop/land: publish a land command
         """
-
-        rospy.logdebug("Start Bebop2Env Init...")
         
         # Internal Vars
         self.controllers_list = []
+	self.camera_image_raw = None
+	self.speed = None
 
         # Namespace
         self.robot_name_space = ""
+	self.action_space = spaces.Box(np.array([0,-1]), np.array([+1,+1]), dtype=np.float32) #linear, angular
 
         # Launch the init function of the Parent Class robot_gazebo_env.RobotGazeboEnv
         super(Bebop2Env, self).__init__(controllers_list=self.controllers_list,
@@ -60,7 +62,7 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
 
         self._check_all_publishers_ready()
         
-        rospy.logdebug("Finished Bebop2Env Init...")
+        rospy.logwarn("Bebop2 Environment initialized")
 
 
     # Methods needed by the RobotGazeboEnv
@@ -76,15 +78,14 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
     def _check_all_sensors_ready(self):
         rospy.logwarn("START SENSOR CHECK")
         self._check_camera_image_raw_ready()
-        rospy.logdebug("ALL SENSORS READY")
         
     def _check_camera_image_raw_ready(self):
         self.camera_image_raw = None
-        rospy.logdebug("Waiting for /bebop/image_raw to be ready...")
+        rospy.logerr("Waiting for /bebop/image_raw to be ready...")
         while self.camera_image_raw is None and not rospy.is_shutdown():
             try:
                 self.camera_image_raw = rospy.wait_for_message("/bebop/image_raw", Image, timeout=5.0)
-                rospy.logdebug("/bebop/image_raw ready =>")
+                rospy.logwarn("/bebop/image_raw ready =>")
             except:
                 rospy.logerr("/bebop/image_raw not ready yet, retrying...")
         return self.camera_image_raw
@@ -106,41 +107,40 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
         """
         Checks that all the publishers are working
         """
-        rospy.logdebug("START PUBLISHER CHECK")
         self._check_cmd_vel_pub_connection()
         self._check_takeoff_pub_connection()
         self._check_land_pub_connection()
-        rospy.logdebug("ALL PUBLISHERS READY")
+        rospy.logwarn("ALL SENSORS READY\n")
 
     def _check_cmd_vel_pub_connection(self):
         rate = rospy.Rate(10)
         while self._cmd_vel_pub.get_num_connections() == 0 and not rospy.is_shutdown():
-            rospy.logdebug("/bebop/cmd_vel not ready yet, retrying...")
+            rospy.logerr("/bebop/cmd_vel not ready yet, retrying...")
             try:
                 rate.sleep()
             except rospy.ROSInterruptException:
                 pass
-        rospy.logdebug("/bebop/cmd_vel publisher ready =>")
+        rospy.logwarn("/bebop/cmd_vel publisher ready =>")
         
     def _check_takeoff_pub_connection(self):
         rate = rospy.Rate(10)
         while self._takeoff_pub.get_num_connections() == 0 and not rospy.is_shutdown():
-            rospy.logdebug("/bebop/takeoff not ready yet, retrying...")
+            rospy.logerr("/bebop/takeoff not ready yet, retrying...")
             try:
                 rate.sleep()
             except rospy.ROSInterruptException:
                 pass
-        rospy.logdebug("/bebop/takeoff publisher ready =>")
+        rospy.logwarn("/bebop/takeoff publisher ready =>")
         
     def _check_land_pub_connection(self):
         rate = rospy.Rate(10)
         while self._land_pub.get_num_connections() == 0 and not rospy.is_shutdown():
-            rospy.logdebug("/bebop/land not ready yet, retrying...")
+            rospy.logerr("/bebop/land not ready yet, retrying...")
             try:
                 rate.sleep()
             except rospy.ROSInterruptException:
                 pass
-        rospy.logdebug("/bebop/land publisher ready =>")
+        rospy.logwarn("/bebop/land publisher ready =>")
     
     # Methods that the TrainingEnvironment will need to define here as virtual
     # because they will be used in RobotGazeboEnv GrandParentClass and defined in the
@@ -189,8 +189,6 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
         Unpauses the simulation and pauses again to allow it to 
         be a self contained action.
         """
-
-        self.gazebo.unpauseSim()
         self._check_takeoff_pub_connection()
         
         takeoff_cmd = Empty()
@@ -198,7 +196,6 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
         
         # wait for launch to finish
         self.wait_time_for_execute_movement()
-        self.gazebo.pauseSim()
         
     def land(self):
         """
@@ -207,7 +204,6 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
         be a self contained action.
         """
 
-        self.gazebo.unpauseSim()
         self._check_land_pub_connection()
         
         land_cmd = Empty()
@@ -215,7 +211,6 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
 
         # wait for landing to finish
         self.wait_time_for_execute_movement()
-        self.gazebo.pauseSim()
         
     def move(self, linear_speed, angular_speed):
         cmd_vel_value = Twist()
@@ -229,7 +224,7 @@ class Bebop2Env(robot_gazebo_env.RobotGazeboEnv):
         self.wait_time_for_execute_movement()
                                         
     def wait_time_for_execute_movement(self):
-        time.sleep(1.0)
+        time.sleep(5.0)
     
     def get_camera_image_raw(self):
         return self.camera_image_raw
