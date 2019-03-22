@@ -18,21 +18,11 @@ register(
 
 class Bebop2BdrEnv(bebop_env.Bebop2Env):
     def __init__(self):
-        # set variables
-	self._init_env_variables()
-        self.cumulated_steps = 0.0
-
-        # init the drone
-        super(Bebop2BdrEnv, self).__init__()
-
-    def _init_env_variables(self):
-        #self.takeoff()
-        self.cumulated_reward = 0.0        
+        super(Bebop2BdrEnv, self).__init__()      
 
     def _set_action(self, action):
-        # send velocity command
-        self.move(action[0], action[1])
-        rospy.logdebug("action set: " + str(action) + "=>")
+        #self.move(something goes here)
+        rospy.logdebug("action set: " + str(action))
 
     def _get_obs(self):
         return self.camera_image_raw, self.speed

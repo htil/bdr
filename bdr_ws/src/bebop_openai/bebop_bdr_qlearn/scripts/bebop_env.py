@@ -23,33 +23,16 @@ from gym import spaces
 class Bebop2Env(robot_ros_env.RobotRosEnv):
 
     def __init__(self):
-        """
-        Initializes a new Bebop2Env environment.
-        
-        Sensor Topic List:
-        * /bebop/camera/image_raw: raw image topic
-        
-        Actuators Topic List: 
-        * /bebop/cmd_vel: publish velocity commands
-        * /bebop/takeoff: publish a takeoff command
-        * /bebop/land: publish a land command
-        """
-        
-        # Internal Vars
-        self.controllers_list = []
-	self.camera_image_raw = None
-	self.speed = None
+	    self.camera_image_raw = None
+        self.lateral = None
+        self.speed = None
+        self.yaw = None
 
-        # Namespace
-        self.robot_name_space = ""
-	self.action_space = spaces.Box(np.array([0,-1]), np.array([+1,+1]), dtype=np.float32) #linear, angular
+        # Define possible actions
+	    self.action_space = spaces.Box(np.array([-1, +1]), np.array([0, 1]), np.array([0, 0.5]), dtype=np.float32) #yaw, speed, lateral
 
         # Launch the init function of the Parent Class robot_gazebo_env.RobotGazeboEnv
-        super(Bebop2Env, self).__init__(controllers_list=self.controllers_list,
-                                            robot_name_space=self.robot_name_space,
-                                            reset_controls=False,
-                                            start_init_physics_parameters=False,
-                                            reset_world_or_sim="WORLD")
+        super(Bebop2Env, self).__init__()
 
         #self.controllers_object.reset_controllers()
         self._check_all_sensors_ready()
