@@ -23,13 +23,13 @@ from gym import spaces
 class Bebop2Env(robot_ros_env.RobotRosEnv):
 
     def __init__(self):
-	    self.camera_image_raw = None
+	self.camera_image_raw = None
         self.lateral = 0
         self.speed = 0
         self.yaw = 0
 
         # Define possible actions
-	    self.action_space = spaces.Box(np.array([-1, +1]), np.array([0, 1]), np.array([0, 0.5]), dtype=np.float32) #yaw, speed, lateral
+	self.action_space = spaces.Box(np.array([-1, 0, -1]), np.array([1, 0.5, 1]), dtype=np.float32) #yaw, speed, lateral
 
         # Launch the init function of the Parent Class robot_gazebo_env.RobotGazeboEnv
         super(Bebop2Env, self).__init__()

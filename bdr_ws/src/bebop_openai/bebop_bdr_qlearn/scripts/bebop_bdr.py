@@ -18,6 +18,8 @@ register(
 
 class Bebop2BdrEnv(bebop_env.Bebop2Env):
     def __init__(self):
+        self.cumulated_reward = 0
+        self.cumulated_steps = 0
         super(Bebop2BdrEnv, self).__init__()      
 
     def _set_action(self, action):
@@ -25,10 +27,11 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         #self.move(action)
 
     def _get_obs(self):
-        return self.yaw, self.speed, self.lateral, self.img
+        return self.yaw, self.speed, self.lateral
 
     def _is_done(self, observations):
-        yaw, speed, lateral, img = observations   
+        yaw, speed, lateral = observations 
+        img = self.camera_image_raw  
         num_white_pixels = np.sum(img == 255)
 
         if num_white_pixels < 50:
@@ -37,7 +40,8 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
             return False
 
     def _compute_reward(self, observations, done):
-        img, speed = observations 
+        yaw, speed, lateral = observations
+        img = self.camera_image_raw 
         height, width = img.shape[:2]
         reward = 0.0
 

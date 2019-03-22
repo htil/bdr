@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 from gym import wrappers, spaces
+from qlearner import QLearner
 import gym
-import qlearn
 import bebop_bdr
 
 import rospy
@@ -23,13 +23,13 @@ if __name__ == '__main__':
 
     # Create the Gym environment
     env = gym.make('BebopBdr-v0')
-    env = wrappers.Monitor(env, outdir, force=True)
     rospy.logwarn("Gym environment launched")
 
     # Set the logging system
     rospack = rospkg.RosPack()
     pkg_path = rospack.get_path('bebop_bdr_qlearn')
     outdir = pkg_path + '/training_results'
+    env = wrappers.Monitor(env, outdir, force=True)
 
     # Q-learning input parameters
     alpha = 0.5
@@ -39,44 +39,53 @@ if __name__ == '__main__':
     epsilon_discount = 0.999
     num_episodes = 1000
     num_steps = 1000
-    running_step: 0.06
+    running_step = 0.06
 
     # Discretize the action space
-    num_bins_angular_z = 21
-    num_bins_linear_x  = 11
-    num_bins_linear_y  = 21
+    num_bins_angular_z = 10
+    num_bins_linear_x  = 10
+    num_bins_linear_y  = 10
 
-    angular_z_bins = pd.cut([-1, 1], bins=num_bins_angular_z, retbin=True)[1][1:-1]
-    linear_x_bins  = pd.cut([0, 1],  bins=num_bins_linear_x,  retbin=True)[1][1:-1]
-    linear_y_bins  = pd.cut([-1, 1], bins=num_bins_linear_y,  retbin=True)[1][1:-1]
+    angular_z_bins = pd.cut([-1, 1], bins=num_bins_angular_z, retbins=True)[1][1:-1]
+    linear_x_bins  = pd.cut([0, 1],  bins=num_bins_linear_x,  retbins=True)[1][1:-1]
+    linear_y_bins  = pd.cut([-1, 1], bins=num_bins_linear_y,  retbins=True)[1][1:-1]
+    rospy.logwarn(angular_z_bins)
     
-    num_possible_states = num_bins_angular_z * num_bins_linear_x * num_bins_linear_y
+    num_states = 10 ** env.action_space.shape[0]
+    num_actions = 10 ** env.action_space.shape[0]
+    rospy.logwarn(str(num_states) + " " + str(num_actions))
 
     # Initialize the algorithm
-    qlearn = qlearn.QLearn(actions=num_possible_states, alpha=alpha, gamma=gamma, epsilon=epsilon)
+    learner = QLearner(num_states=num_states,
+                       num_actions=num_actions,
+                       alpha=0.2,
+                       gamma=1,
+                       random_action_rate=0.9,
+                       random_action_decay_rate=0.99)
 
     start_time = time.time()
     last_time_steps = np.ndarray(0)
     highest_reward = 0
 
-	for episode in range(num_episodes):
+    for episode in range(num_episodes):
         rospy.logwarn("############### START EPISODE " + str(episode) + " ###############")
         
         observation = env.reset()
         yaw, speed, lateral = observation
+        rospy.logwarn(str(observation) + " " + str(to_bin(yaw, angular_z_bins)) + " " + str(to_bin(speed, linear_x_bins)) + " " + str(to_bin(lateral, linear_y_bins)))
 
-        state = build_state([to_bin(yaw, num_bins_angular_z),
-                             to_bin(speed, num_bins_linear_x),
-                             to_bin(lateral, num_bins_linear_y)])
+        state = build_state([to_bin(yaw, angular_z_bins),
+                             to_bin(speed, linear_x_bins),
+                             to_bin(lateral, linear_y_bins)])
+        
+        action = learner.set_initial_state(state)
+        rospy.logwarn(action)
 
         cumulated_reward = 0
 
         for step in range(num_steps):
              # Pick an action based on the current state
-            action = qlearn.chooseAction(state)
-            rospy.logwarn("Episode " + str(episode) + "Step " + str(step) + ":" + action)
-
-            # Execute the action in the environment and get feedback
+            rospy.logwarn("Episode " + str(episode) + " Step " + str(step) + ": " + str(action))
             observation, reward, done, info = env.step(action)
 
             # Add to overall reward
@@ -85,27 +94,24 @@ if __name__ == '__main__':
             # Adjust learning vars
             if highest_reward < cumulated_reward:
                 highest_reward = cumulated_reward
-            
-            if qlearn.epsilon > 0.05:
-                qlearn.epsilon *= epsilon_discount
 
             # Discretize new observation
             yaw, speed, lateral = observation
-            state = build_state([to_bin(yaw, num_bins_angular_z),
-                             to_bin(speed, num_bins_linear_x),
-                             to_bin(lateral, num_bins_linear_y)])
+            state = build_state([to_bin(yaw, angular_z_bins),
+                             to_bin(speed, linear_x_bins),
+                             to_bin(lateral, linear_y_bins)])
+            
+            if done:
+                reward = -200
+
+            action = learner.move(state, reward)
 
             if done:
                 last_time_steps = np.append(last_time_steps, [int(step + 1)])
-                reward = -200
-                qlearn.learn(state, action, reward, nextState)
                 break
-            else:
-                qlearn.learn(state, action, reward, nextState)
-                state = nextState
 
         rospy.logwarn("Episode " + str(episode) + " complete.")
-		raw_input("Press enter to begin the next episode")
+        raw_input("Press enter to begin the next episode")
 
     l = last_time_steps.tolist()
     rospy.logwarn("Overall score: {0.4f}".format(last_time_steps.mean()))
