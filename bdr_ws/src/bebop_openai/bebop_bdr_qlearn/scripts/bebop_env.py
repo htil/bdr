@@ -19,6 +19,7 @@ from std_msgs.msg import Empty
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
 from gym import spaces
+import pandas as pd
 
 class Bebop2Env(robot_ros_env.RobotRosEnv):
 
@@ -30,12 +31,20 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
 
         # Define possible actions
 	self.action_space = spaces.Box(np.array([-1, 0, -1]), np.array([1, 0.5, 1]), dtype=np.float32) #yaw, speed, lateral
+	self.angular_z_bins = pd.cut([-1, 1], bins=10, retbins=True)[1][1:-1]
+	self.linear_x_bins  = pd.cut([0, 1],  bins=10, retbins=True)[1][1:-1]
+	self.linear_y_bins  = pd.cut([-1, 1], bins=10, retbins=True)[1][1:-1]
+
+	self.move_low = -1.0
+	self.speed_low = 0.0
+	self.high = 1.0
 
         # Launch the init function of the Parent Class robot_gazebo_env.RobotGazeboEnv
         super(Bebop2Env, self).__init__()
 
         # Start all the ROS related components
         self._image_sub = rospy.Subscriber("/bebop/image_raw", Image, self._camera_image_raw_callback)
+        self._image_pub = rospy.Publisher("bebop/filtered", Image, queue_size=1)
         self._cmd_vel_pub = rospy.Publisher('/bebop/cmd_vel', Twist, queue_size=1)
         self._takeoff_pub = rospy.Publisher('/bebop/takeoff', Empty, queue_size=1)
         self._land_pub = rospy.Publisher('/bebop/land', Empty, queue_size=1)
@@ -53,7 +62,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         while self.camera_image_raw is None and not rospy.is_shutdown():
             try:
                 self.camera_image_raw = rospy.wait_for_message("/bebop/image_raw", Image, timeout=5.0)
-                rospy.logwarn("/bebop/image_raw ready =>")
+                rospy.logdebug("/bebop/image_raw ready =>")
             except:
                 rospy.logerr("/bebop/image_raw not ready yet, retrying...")
         return self.camera_image_raw
@@ -61,15 +70,16 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
     def _camera_image_raw_callback(self, data):
         bridge = CvBridge()
         img = bridge.imgmsg_to_cv2(data, "bgr8")
-        hls = cv2.cvtColor(img, cv2.COLOR_RGB2HLS)
-        scaled = cv2.resize(hls, None, fx=0.25, fy=0.25)
+        gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+        scaled = cv2.resize(gray, None, fx=0.25, fy=0.25)
 
         # filter by red
-        lower_range = np.array([0,100,100], dtype=np.uint8)
-        upper_range = np.array([125,200,200], dtype=np.uint8)
+        lower_range = np.array([0], dtype=np.uint8)
+        upper_range = np.array([75], dtype=np.uint8)
         filtered = cv2.inRange(scaled, lower_range, upper_range)
 
         self.camera_image_raw = filtered
+        self._image_pub.publish(bridge.cv2_to_imgmsg(filtered))
     
     def _check_all_publishers_ready(self):
         self._check_cmd_vel_pub_connection()
@@ -84,7 +94,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
                 rate.sleep()
             except rospy.ROSInterruptException:
                 pass
-        rospy.logwarn("/bebop/cmd_vel publisher ready =>")
+        rospy.logdebug("/bebop/cmd_vel publisher ready =>")
         
     def _check_takeoff_pub_connection(self):
         rate = rospy.Rate(10)
@@ -94,7 +104,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
                 rate.sleep()
             except rospy.ROSInterruptException:
                 pass
-        rospy.logwarn("/bebop/takeoff publisher ready =>")
+        rospy.logdebug("/bebop/takeoff publisher ready =>")
         
     def _check_land_pub_connection(self):
         rate = rospy.Rate(10)
@@ -104,7 +114,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
                 rate.sleep()
             except rospy.ROSInterruptException:
                 pass
-        rospy.logwarn("/bebop/land publisher ready =>")
+        rospy.logdebug("/bebop/land publisher ready =>")
 
     def _compute_reward(self, observations, done):
         raise NotImplementedError()
@@ -132,19 +142,34 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         self._land_pub.publish(land_cmd)
         self.wait_time_for_execute_movement()
         
-    def move(self, yaw, lateral, speed):
-        self.yaw = yaw
-        self.lateral = lateral
-        self.speed = speed
+    def get_bin_value(self, bins, idx, low):
+        if idx == 0:
+            return np.average([low, bins[idx]])
+        elif idx == 9:
+            return np.average([bins[idx-1], self.high])
+        else:
+            return np.average([bins[idx], bins[idx-1]]) 
+
+    def move(self, x):
+        self.yaw = self.get_bin_value(self.angular_z_bins, x[0], self.move_low)
+        self.lateral = self.get_bin_value(self.linear_y_bins, x[1], self.move_low)
+        self.speed = self.get_bin_value(self.linear_x_bins, x[2], self.speed_low)
         
+        yaw_clean = float("{0:.1f}".format(self.yaw))
+        lateral_clean = float("{0:.1f}".format(self.lateral))
+        speed_clean = float("{0:.1f}".format(self.speed))
+
+        print("Action Taken: " + str((yaw_clean, lateral_clean, speed_clean)) + "\n")
+
         velocity_cmd = Twist()
-        velocity_cmd.angular.z = yaw
-        velocity_cmd.linear.x  = speed
-        velocity_cmd.linear.y  = lateral
+        velocity_cmd.angular.z = self.yaw
+        velocity_cmd.linear.x  = self.speed
+        velocity_cmd.linear.y  = self.lateral
 
         self._check_cmd_vel_pub_connection()
-        #self._cmd_vel_pub.publish(cmd_vel_value)
+        self._cmd_vel_pub.publish(velocity_cmd)
         self.wait_time_for_execute_movement()
+
                                         
     def wait_time_for_execute_movement(self):
         time.sleep(1.0)

@@ -2,6 +2,7 @@ import rospy
 import numpy as np
 from gym import spaces
 import bebop_env
+import cv2
 
 from gym.envs.registration import register
 from geometry_msgs.msg import Point
@@ -23,8 +24,8 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         super(Bebop2BdrEnv, self).__init__()      
 
     def _set_action(self, action):
-        print(action)
-        #self.move(action)
+        bins = [int(x) for x in str(action).zfill(3)]
+        self.move(bins)
 
     def _get_obs(self):
         return self.yaw, self.speed, self.lateral
@@ -34,7 +35,7 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         img = self.camera_image_raw  
         num_white_pixels = np.sum(img == 255)
 
-        if num_white_pixels < 50:
+        if num_white_pixels < 500:
             return True
         else:
             return False
@@ -43,15 +44,17 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         yaw, speed, lateral = observations
         img = self.camera_image_raw 
         height, width = img.shape[:2]
+        hh = height/2
+        ww = width/2
         reward = 0.0
 
         # check center of image
-        if img[height/2, width/2] == 255:
+        if np.sum(img[ww-5:ww+5][hh-5:hh+5] == 255) > 0:
             reward += 10
         else:
             reward -= 10
 
-        if speed > 5:
+        if speed >= 0.5:
             reward += 2
 
         self.cumulated_reward += reward

@@ -14,16 +14,20 @@ class RobotRosEnv(gym.Env):
         return [seed]
 
     def step(self, action):
-        #self._set_action(action)
+        self._set_action(action)
         obs = self._get_obs()
         done = self._is_done(obs)
         info = {}
         reward = self._compute_reward(obs, done)
         self.cumulated_episode_reward += reward
+	
+        if done:
+            self.land()
+
         return obs, reward, done, info
 
     def reset(self):
-	    #self.takeoff()
+        self.takeoff()
         obs = self._get_obs()
         return obs
 

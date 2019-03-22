@@ -49,11 +49,9 @@ if __name__ == '__main__':
     angular_z_bins = pd.cut([-1, 1], bins=num_bins_angular_z, retbins=True)[1][1:-1]
     linear_x_bins  = pd.cut([0, 1],  bins=num_bins_linear_x,  retbins=True)[1][1:-1]
     linear_y_bins  = pd.cut([-1, 1], bins=num_bins_linear_y,  retbins=True)[1][1:-1]
-    rospy.logwarn(angular_z_bins)
     
     num_states = 10 ** env.action_space.shape[0]
     num_actions = 10 ** env.action_space.shape[0]
-    rospy.logwarn(str(num_states) + " " + str(num_actions))
 
     # Initialize the algorithm
     learner = QLearner(num_states=num_states,
@@ -83,9 +81,11 @@ if __name__ == '__main__':
 
         cumulated_reward = 0
 
-        for step in range(num_steps):
+        step = 0
+        while True:
+            step += 1            
              # Pick an action based on the current state
-            rospy.logwarn("Episode " + str(episode) + " Step " + str(step) + ": " + str(action))
+            rospy.logwarn("Episode " + str(episode) + " Step " + str(step) + ": " + str(action) + " reward: " + str(cumulated_reward))
             observation, reward, done, info = env.step(action)
 
             # Add to overall reward
