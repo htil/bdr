@@ -21,29 +21,20 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         super(Bebop2BdrEnv, self).__init__()      
 
     def _set_action(self, action):
-        #self.move(something goes here)
-        rospy.logdebug("action set: " + str(action))
+        print(action)
+        #self.move(action)
 
     def _get_obs(self):
-        return self.camera_image_raw, self.speed
+        return self.yaw, self.speed, self.lateral, self.img
 
     def _is_done(self, observations):
-        img, speed = observations   
+        yaw, speed, lateral, img = observations   
         num_white_pixels = np.sum(img == 255)
 
         if num_white_pixels < 50:
-            episode_done = True
+            return True
         else:
-            episode_done = False
-
-        if episode_done:
-            rospy.logwarn("Action Taken: Land")
-            self.land()
-            rospy.logerr("episode_done: " + str(episode_done) + "=>")
-        else:
-            rospy.logwarn("episode_done: "+str(episode_done) + "=>")
-
-        return episode_done
+            return False
 
     def _compute_reward(self, observations, done):
         img, speed = observations 
