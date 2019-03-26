@@ -28,11 +28,10 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         self.move(bins)
 
     def _get_obs(self):
-        return self.yaw, self.speed, self.lateral
+        return self.camera_image_raw
 
     def _is_done(self, observations):
-        yaw, speed, lateral = observations 
-        img = self.camera_image_raw  
+        img = observations
         num_white_pixels = np.sum(img == 255)
 
         if num_white_pixels < 500:
@@ -41,8 +40,7 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
             return False
 
     def _compute_reward(self, observations, done):
-        yaw, speed, lateral = observations
-        img = self.camera_image_raw 
+        img = observations
         height, width = img.shape[:2]
         hh = height/2
         ww = width/2

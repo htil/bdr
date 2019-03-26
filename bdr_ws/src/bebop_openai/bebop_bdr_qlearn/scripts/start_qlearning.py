@@ -38,20 +38,17 @@ if __name__ == '__main__':
     
     epsilon_discount = 0.999
     num_episodes = 1000
-    num_steps = 1000
-    running_step = 0.06
 
     # Discretize the action space
-    num_bins_angular_z = 10
-    num_bins_linear_x  = 10
-    num_bins_linear_y  = 10
-
-    angular_z_bins = pd.cut([-1, 1], bins=num_bins_angular_z, retbins=True)[1][1:-1]
-    linear_x_bins  = pd.cut([0, 1],  bins=num_bins_linear_x,  retbins=True)[1][1:-1]
-    linear_y_bins  = pd.cut([-1, 1], bins=num_bins_linear_y,  retbins=True)[1][1:-1]
-    
-    num_states = 10 ** env.action_space.shape[0]
     num_actions = 10 ** env.action_space.shape[0]
+    num_bins = 10
+
+    angular_z_bins = pd.cut([-1, 1], bins=num_bins, retbins=True)[1][1:-1]
+    linear_x_bins  = pd.cut([ 0, 1], bins=num_bins, retbins=True)[1][1:-1]
+    linear_y_bins  = pd.cut([-1, 1], bins=num_bins, retbins=True)[1][1:-1]
+
+    # Size of observation space
+    num_states = 2 ** (env.observation_space.shape[0] * env.observation_space.shape[1])
 
     # Initialize the algorithm
     learner = QLearner(num_states=num_states,
@@ -69,19 +66,14 @@ if __name__ == '__main__':
         rospy.logwarn("############### START EPISODE " + str(episode) + " ###############")
         
         observation = env.reset()
-        yaw, speed, lateral = observation
-        rospy.logwarn(str(observation) + " " + str(to_bin(yaw, angular_z_bins)) + " " + str(to_bin(speed, linear_x_bins)) + " " + str(to_bin(lateral, linear_y_bins)))
+        img = observation
 
-        state = build_state([to_bin(yaw, angular_z_bins),
-                             to_bin(speed, linear_x_bins),
-                             to_bin(lateral, linear_y_bins)])
-        
+        state = int(''.join(img), 2)
         action = learner.set_initial_state(state)
-        rospy.logwarn(action)
 
         cumulated_reward = 0
-
         step = 0
+        
         while True:
             step += 1            
              # Pick an action based on the current state
@@ -96,10 +88,8 @@ if __name__ == '__main__':
                 highest_reward = cumulated_reward
 
             # Discretize new observation
-            yaw, speed, lateral = observation
-            state = build_state([to_bin(yaw, angular_z_bins),
-                             to_bin(speed, linear_x_bins),
-                             to_bin(lateral, linear_y_bins)])
+            img = observation
+            state = int(''.join(img), 2)
             
             if done:
                 reward = -200

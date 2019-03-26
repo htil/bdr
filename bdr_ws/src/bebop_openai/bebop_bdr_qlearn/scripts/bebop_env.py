@@ -24,20 +24,23 @@ import pandas as pd
 class Bebop2Env(robot_ros_env.RobotRosEnv):
 
     def __init__(self):
-	self.camera_image_raw = None
+	    self.camera_image_raw = None
         self.lateral = 0
         self.speed = 0
         self.yaw = 0
 
-        # Define possible actions
-	self.action_space = spaces.Box(np.array([-1, 0, -1]), np.array([1, 0.5, 1]), dtype=np.float32) #yaw, speed, lateral
-	self.angular_z_bins = pd.cut([-1, 1], bins=10, retbins=True)[1][1:-1]
-	self.linear_x_bins  = pd.cut([0, 1],  bins=10, retbins=True)[1][1:-1]
-	self.linear_y_bins  = pd.cut([-1, 1], bins=10, retbins=True)[1][1:-1]
+        # Define action and observation space
+        self.action_space = spaces.Box(np.array([-1, 0, -1]), np.array([1, 0.5, 1]), dtype=np.float32) #yaw, speed, lateral
+        self.observation_space = np.zeros(shape=(100,100))
 
-	self.move_low = -1.0
-	self.speed_low = 0.0
-	self.high = 1.0
+        self.num_bins = 10
+        self.angular_z_bins = pd.cut([-1, 1], bins=num_bins, retbins=True)[1][1:-1]
+        self.linear_x_bins  = pd.cut([ 0, 1], bins=num_bins, retbins=True)[1][1:-1]
+        self.linear_y_bins  = pd.cut([-1, 1], bins=num_bins, retbins=True)[1][1:-1]
+
+        self.move_low = -1.0
+        self.speed_low = 0.0
+        self.high = 1.0
 
         # Launch the init function of the Parent Class robot_gazebo_env.RobotGazeboEnv
         super(Bebop2Env, self).__init__()
@@ -70,16 +73,20 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
     def _camera_image_raw_callback(self, data):
         bridge = CvBridge()
         img = bridge.imgmsg_to_cv2(data, "bgr8")
-        gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-        scaled = cv2.resize(gray, None, fx=0.25, fy=0.25)
 
         # filter by red
-        lower_range = np.array([0], dtype=np.uint8)
-        upper_range = np.array([75], dtype=np.uint8)
-        filtered = cv2.inRange(scaled, lower_range, upper_range)
+        hls  = cv2.cvtColor(self.image, cv2.COLOR_RGB2HLS)
+        lower = np.array([0,   100, 100], dtype=np.uint8)
+        upper = np.array([125, 200, 200], dtype=np.uint8)
+        filtered = cv2.inRange(hls, lower, upper)
 
-        self.camera_image_raw = filtered
-        self._image_pub.publish(bridge.cv2_to_imgmsg(filtered))
+        # convert to grayscale
+        gray = cv2.cvtColor(filtered, cv2.COLOR_HLS2GRAY)
+        scaled = cv2.resize(gray, None, fx=0.25, fy=0.25)    
+        print(scaled.shape())
+
+        self.camera_image_raw = scaled
+        self._image_pub.publish(bridge.cv2_to_imgmsg(scaled))
     
     def _check_all_publishers_ready(self):
         self._check_cmd_vel_pub_connection()
@@ -167,7 +174,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         velocity_cmd.linear.y  = self.lateral
 
         self._check_cmd_vel_pub_connection()
-        self._cmd_vel_pub.publish(velocity_cmd)
+        #self._cmd_vel_pub.publish(velocity_cmd)
         self.wait_time_for_execute_movement()
 
                                         
