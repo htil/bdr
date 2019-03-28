@@ -3,11 +3,13 @@ import numpy as np
 from gym import spaces
 import bebop_env
 import cv2
+import time
 
 from gym.envs.registration import register
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Vector3
 from tf.transformations import euler_from_quaternion
+from pynput.keyboard import Key, Listener
 
 timestep_limit_per_episode = 10000
 
@@ -18,9 +20,21 @@ register(
     )
 
 class Bebop2BdrEnv(bebop_env.Bebop2Env):
+
+    def on_press(self, key):
+        try:
+            if key == Key.space:
+                self.done = True
+
+        except AttributeError:
+            pass
+
     def __init__(self):
         self.cumulated_reward = 0
         self.cumulated_steps = 0
+        self.done = False
+        self.listener = Listener(on_press=self.on_press)
+        self.listener.start()
         super(Bebop2BdrEnv, self).__init__()      
 
     def _set_action(self, action):
@@ -28,32 +42,24 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         self.move(bins)
 
     def _get_obs(self):
-        return self.camera_image_raw
+        flat = self.camera_image_scaled.flatten()
+        state = int(''.join(["0" if x == 0 else "1" for x in flat]), 2)
+        return state
 
     def _is_done(self, observations):
-        img = observations
-        num_white_pixels = np.sum(img == 255)
-
-        if num_white_pixels < 500:
-            return True
-        else:
-            return False
+        return self.done
 
     def _compute_reward(self, observations, done):
-        img = observations
+        img = self.camera_image_raw
         height, width = img.shape[:2]
         hh = height/2
         ww = width/2
-        reward = 0.0
 
         # check center of image
-        if np.sum(img[ww-5:ww+5][hh-5:hh+5] == 255) > 0:
-            reward += 10
+        if np.sum(img[ww-10:ww+10][hh-10:hh+10] == 255) > 0:
+            reward = 10
         else:
-            reward -= 10
-
-        if speed >= 0.5:
-            reward += 2
+            reward = -10
 
         self.cumulated_reward += reward
         self.cumulated_steps += 1

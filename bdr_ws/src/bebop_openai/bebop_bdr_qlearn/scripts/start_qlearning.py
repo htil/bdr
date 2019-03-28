@@ -62,14 +62,11 @@ if __name__ == '__main__':
     last_time_steps = np.ndarray(0)
     highest_reward = 0
 
+
     for episode in range(num_episodes):
         rospy.logwarn("############### START EPISODE " + str(episode) + " ###############")
         
         observation = env.reset()
-        img = observation
-
-        state = int(''.join(img), 2)
-        action = learner.set_initial_state(state)
 
         cumulated_reward = 0
         step = 0
@@ -77,30 +74,19 @@ if __name__ == '__main__':
         while True:
             step += 1            
              # Pick an action based on the current state
-            rospy.logwarn("Episode " + str(episode) + " Step " + str(step) + ": " + str(action) + " reward: " + str(cumulated_reward))
-            observation, reward, done, info = env.step(action)
-
-            # Add to overall reward
-            cumulated_reward += reward
-
-            # Adjust learning vars
-            if highest_reward < cumulated_reward:
-                highest_reward = cumulated_reward
-
-            # Discretize new observation
-            img = observation
-            state = int(''.join(img), 2)
-            
-            if done:
-                reward = -200
-
-            action = learner.move(state, reward)
+            rospy.logwarn("Episode " + str(episode) + " Step " + str(step))
+            observation, reward, done, info = env.step(observation)
 
             if done:
+                reward -= 200
+                cumulated_reward += reward
                 last_time_steps = np.append(last_time_steps, [int(step + 1)])
                 break
 
-        rospy.logwarn("Episode " + str(episode) + " complete.")
+            cumulated_reward += reward
+            action = learner.move(observation, reward)
+
+        rospy.logwarn("Episode " + str(episode) + " complete. " + "Episode Reward: " + str(cumulated_reward))
         raw_input("Press enter to begin the next episode")
 
     l = last_time_steps.tolist()
