@@ -11,6 +11,7 @@ import rospkg
 import time
 import numpy as np
 import pandas as pd
+import pickle
 
 def build_state(features):
     return int("".join(map(lambda feature: str(int(feature)), features)))
@@ -40,12 +41,7 @@ if __name__ == '__main__':
     num_episodes = 1000
 
     # Discretize the action space
-    num_actions = 10 ** env.action_space.shape[0]
-    num_bins = 10
-
-    angular_z_bins = pd.cut([-1, 1], bins=num_bins, retbins=True)[1][1:-1]
-    linear_x_bins  = pd.cut([ 0, 1], bins=num_bins, retbins=True)[1][1:-1]
-    linear_y_bins  = pd.cut([-1, 1], bins=num_bins, retbins=True)[1][1:-1]
+    num_actions = 5
 
     # Size of observation space
     num_states = 2 ** (env.observation_space.shape[0] * env.observation_space.shape[1])
@@ -56,7 +52,8 @@ if __name__ == '__main__':
                        alpha=0.2,
                        gamma=1,
                        random_action_rate=0.9,
-                       random_action_decay_rate=0.99)
+                       random_action_decay_rate=0.99,
+                       load_last=True)
 
     start_time = time.time()
     last_time_steps = np.ndarray(0)
@@ -87,6 +84,7 @@ if __name__ == '__main__':
             action = learner.move(observation, reward)
 
         rospy.logwarn("Episode " + str(episode) + " complete. " + "Episode Reward: " + str(cumulated_reward))
+        learner.save()
         raw_input("Press enter to begin the next episode")
 
     l = last_time_steps.tolist()

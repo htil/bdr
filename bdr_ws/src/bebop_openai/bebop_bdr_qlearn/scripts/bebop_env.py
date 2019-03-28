@@ -26,7 +26,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
     def __init__(self):
 	self.camera_image_raw = None
         self.lateral = 0
-        self.speed = 0
+        self.speed = 0.1
         self.yaw = 0
 
         # Define action and observation space
@@ -134,6 +134,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         
     def takeoff(self):
         takeoff_cmd = Empty()
+        print("takeoff")
 
         self._check_takeoff_pub_connection()  
         self._takeoff_pub.publish(takeoff_cmd)
@@ -141,6 +142,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         
     def land(self):
         land_cmd = Empty()
+        print("land")
         
         self._check_land_pub_connection()
         self._land_pub.publish(land_cmd)
@@ -154,29 +156,32 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         else:
             return np.average([bins[idx], bins[idx-1]]) 
 
-    def move(self, x):
-        self.yaw = self.get_bin_value(self.angular_z_bins, x[0], self.move_low)
-        self.lateral = self.get_bin_value(self.linear_y_bins, x[1], self.move_low)
-        self.speed = self.get_bin_value(self.linear_x_bins, x[2], self.speed_low)
-        
-        yaw_clean = float("{0:.1f}".format(self.yaw))
-        lateral_clean = float("{0:.1f}".format(self.lateral))
-        speed_clean = float("{0:.1f}".format(self.speed))
+    def move(self, action):
+        y = 0.0
+        if action == 0:
+            y = -0.1
+        elif action == 1:
+            y = -0.05
+        elif action == 2:
+            y = 0.0
+        elif action == 3:
+            y = 0.05
+        elif action == 4:
+            y = 0.1
 
-        print("Action Taken: " + str((yaw_clean, lateral_clean, speed_clean)) + "\n")
+        print("Action Taken: " + str(y) + "\n")
 
         velocity_cmd = Twist()
-        velocity_cmd.angular.z = self.yaw
         velocity_cmd.linear.x  = self.speed
-        velocity_cmd.linear.y  = self.lateral
+        velocity_cmd.linear.y  = y
 
         self._check_cmd_vel_pub_connection()
-        #self._cmd_vel_pub.publish(velocity_cmd)
+        self._cmd_vel_pub.publish(velocity_cmd)
         self.wait_time_for_execute_movement()
 
                                         
     def wait_time_for_execute_movement(self):
-        time.sleep(1.0)
+        time.sleep(0.5)
     
     def get_camera_image_raw(self):
         return self.camera_image_raw

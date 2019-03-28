@@ -38,8 +38,7 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         super(Bebop2BdrEnv, self).__init__()      
 
     def _set_action(self, action):
-        bins = [int(x) for x in str(action).zfill(3)]
-        self.move(bins)
+        self.move(action)
 
     def _get_obs(self):
         flat = self.camera_image_scaled.flatten()

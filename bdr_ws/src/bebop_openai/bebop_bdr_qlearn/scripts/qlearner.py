@@ -1,5 +1,6 @@
 import numpy as np
 import random
+import pickle
 
 class QLearner:
     def __init__(self,
@@ -8,7 +9,8 @@ class QLearner:
                  alpha=0.2,
                  gamma=0.9,
                  random_action_rate=0.5,
-                 random_action_decay_rate=0.99):
+                 random_action_decay_rate=0.99,
+                 load_last=False):
         self.num_states = num_states
         self.num_actions = num_actions
         self.alpha = alpha
@@ -17,7 +19,12 @@ class QLearner:
         self.random_action_decay_rate = random_action_decay_rate
         self.state = 0
         self.action = 0
-        self.qtable = np.random.uniform(low=-1, high=1, size=(num_states, num_actions))
+        
+        if load_last is True:
+            with open('/home/landonbentley/bdr/bdr_ws/src/bebop_openai/bebop_bdr_qlearn/training_results/qresults.pkl', 'rb') as qresults:
+                self.qtable = pickle.load(qresults)
+        else:
+            self.qtable = np.random.uniform(low=-1, high=1, size=(num_states, num_actions))
 
     def set_initial_state(self, state):
         """
@@ -28,6 +35,10 @@ class QLearner:
         self.state = state
         self.action = self.qtable[state].argsort()[-1]
         return self.action
+
+    def save(self):
+        with open('/home/landonbentley/bdr/bdr_ws/src/bebop_openai/bebop_bdr_qlearn/training_results/qresults.pkl', 'wb') as qresults:
+            pickle.dump(self.qtable, qresults)
 
     def move(self, state_prime, reward):
         """
