@@ -10,7 +10,7 @@ class QLearner:
                  gamma=0.2,
                  random_action_rate=0.5,
                  random_action_decay_rate=0.9,
-                 load_last=False):
+                 load_last=True):
         self.num_states = num_states
         self.num_actions = num_actions
         self.alpha = alpha

@@ -53,7 +53,7 @@ if __name__ == '__main__':
                        gamma=0.2,
                        random_action_rate=0.9,
                        random_action_decay_rate=0.999,
-                       load_last=True)
+                       load_last=False)
 
     start_time = time.time()
     last_time_steps = np.ndarray(0)

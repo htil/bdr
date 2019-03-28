@@ -60,7 +60,7 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         if center> 0:
             reward = center // 10
         else:
-            reward = -50
+            reward = -1500
 
         self.cumulated_reward += reward
         self.cumulated_steps += 1

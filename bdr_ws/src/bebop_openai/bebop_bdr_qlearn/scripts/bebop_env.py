@@ -26,7 +26,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
     def __init__(self):
 	self.camera_image_raw = None
         self.lateral = 0
-        self.speed = 0.1
+        self.speed = 0.075
         self.yaw = 0
 
         # Define action and observation space
