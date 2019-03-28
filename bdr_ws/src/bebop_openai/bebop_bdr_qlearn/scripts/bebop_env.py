@@ -181,7 +181,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
 
                                         
     def wait_time_for_execute_movement(self):
-        time.sleep(0.5)
+        time.sleep(0.25)
     
     def get_camera_image_raw(self):
         return self.camera_image_raw

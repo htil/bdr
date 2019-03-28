@@ -6,10 +6,10 @@ class QLearner:
     def __init__(self,
                  num_states=100,
                  num_actions=4,
-                 alpha=0.2,
-                 gamma=0.9,
+                 alpha=0.9,
+                 gamma=0.2,
                  random_action_rate=0.5,
-                 random_action_decay_rate=0.99,
+                 random_action_decay_rate=0.9,
                  load_last=False):
         self.num_states = num_states
         self.num_actions = num_actions
@@ -37,6 +37,7 @@ class QLearner:
         return self.action
 
     def save(self):
+        print(str(self.alpha), str(self.gamma), str(self.random_action_rate))
         with open('/home/landonbentley/bdr/bdr_ws/src/bebop_openai/bebop_bdr_qlearn/training_results/qresults.pkl', 'wb') as qresults:
             pickle.dump(self.qtable, qresults)
 
@@ -57,6 +58,7 @@ class QLearner:
 
         if choose_random_action:
             action_prime = random.randint(0, self.num_actions - 1)
+            print("random", str(action_prime))
         else:
             action_prime = self.qtable[state_prime].argsort()[-1]
 

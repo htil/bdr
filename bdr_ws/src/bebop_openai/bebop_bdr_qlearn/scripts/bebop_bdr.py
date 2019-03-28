@@ -54,13 +54,13 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         hh = height/2
         ww = width/2
 
-        center = np.sum(img[hh-5:hh+5, ww-5:ww+5] == 255)
+        center = np.sum(img[hh-80:hh+120, ww-75:ww+75] == 255)
         print(center)
         # check center of image
-        if center > 0:
-            reward = 10
+        if center> 0:
+            reward = center // 10
         else:
-            reward = -10
+            reward = -50
 
         self.cumulated_reward += reward
         self.cumulated_steps += 1

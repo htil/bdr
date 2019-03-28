@@ -48,11 +48,11 @@ if __name__ == '__main__':
 
     # Initialize the algorithm
     learner = QLearner(num_states=num_states,
-                       num_actions=num_actions,
-                       alpha=0.2,
-                       gamma=1,
+                       num_actions=5,
+                       alpha=0.9,
+                       gamma=0.2,
                        random_action_rate=0.9,
-                       random_action_decay_rate=0.99,
+                       random_action_decay_rate=0.999,
                        load_last=True)
 
     start_time = time.time()
@@ -64,6 +64,7 @@ if __name__ == '__main__':
         rospy.logwarn("############### START EPISODE " + str(episode) + " ###############")
         
         observation = env.reset()
+        action = learner.set_initial_state(observation)
 
         cumulated_reward = 0
         step = 0
@@ -72,7 +73,7 @@ if __name__ == '__main__':
             step += 1            
              # Pick an action based on the current state
             rospy.logwarn("Episode " + str(episode) + " Step " + str(step))
-            observation, reward, done, info = env.step(observation)
+            observation, reward, done, info = env.step(action)
 
             if done:
                 reward -= 200
@@ -82,6 +83,7 @@ if __name__ == '__main__':
 
             cumulated_reward += reward
             action = learner.move(observation, reward)
+            print("main", str(action))
 
         rospy.logwarn("Episode " + str(episode) + " complete. " + "Episode Reward: " + str(cumulated_reward))
         learner.save()
