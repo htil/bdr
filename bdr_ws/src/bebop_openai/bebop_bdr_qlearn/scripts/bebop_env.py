@@ -47,7 +47,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
 
         # Start all the ROS related components
         self._image_sub = rospy.Subscriber("/bebop/image_raw", Image, self._camera_image_raw_callback)
-        self._image_pub = rospy.Publisher("bebop/filtered", Image, queue_size=1)
+        self._image_pub = rospy.Publisher("/bebop/filtered", Image, queue_size=1)
         self._cmd_vel_pub = rospy.Publisher('/bebop/cmd_vel', Twist, queue_size=1)
         self._takeoff_pub = rospy.Publisher('/bebop/takeoff', Empty, queue_size=1)
         self._land_pub = rospy.Publisher('/bebop/land', Empty, queue_size=1)
@@ -83,7 +83,7 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
 
         self.camera_image_raw = filtered
         self.camera_image_scaled = scaled
-        self._image_pub.publish(bridge.cv2_to_imgmsg(gray))
+        self._image_pub.publish(bridge.cv2_to_imgmsg(filtered))
     
     def _check_all_publishers_ready(self):
         self._check_cmd_vel_pub_connection()
