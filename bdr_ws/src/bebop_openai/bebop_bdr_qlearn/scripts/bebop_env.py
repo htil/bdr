@@ -30,11 +30,12 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         self.last_error = 0.0
 
         # Define action and observation space
-        self.actions = 89
-        self.observations = 5
+        self.actions = 889
+        self.observations = 56
 
         self.kp = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
         self.kd = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+        self.yaw = [-0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4]
 
         # Launch the init function of the Parent Class robot_gazebo_env.RobotGazeboEnv
         super(Bebop2Env, self).__init__()
@@ -139,12 +140,12 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         self.wait_time_for_execute_movement()
 
     def move(self, action): 
-        kpi, kdi = [int(x) for x in str(action).zfill(2)]
-        print(str(kpi), str(kdi), str(self.error))
-        y = -0.5*(self.kp[kpi] * self.error + self.kd[kdi] * (self.error - self.last_error));
-        z = -0.75*(self.kp[kpi] * self.error + self.kd[kdi] * (self.error - self.last_error));
+        kpi, kdi, yi = [int(x) for x in str(action).zfill(3)]
+        print(str(kpi), str(kdi), str(yi))
+        y = -0.5*(self.kp[kpi] * self.error + self.kd[kdi] * (self.error - self.last_error))
+        z = self.yaw[yi]
 
-        print("Action Taken: ", str(y))
+        print("Action Taken: ", str(y), str(z))
 
         velocity_cmd = Twist()
         velocity_cmd.linear.x  = self.speed

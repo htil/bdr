@@ -41,10 +41,10 @@ if __name__ == '__main__':
     num_episodes = 1000
 
     # Discretize the action space
-    num_actions = 89
+    num_actions = 889
 
     # Size of observation space
-    num_states = 5
+    num_states = 56
 
     # Initialize the algorithm
     learner = QLearner(num_states=num_states,

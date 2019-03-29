@@ -71,7 +71,30 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
             self.error = 2
             state = 4
 
-        return state
+         # yaw
+        edges = cv2.Canny(self.image, 50, 150, apertureSize=3)
+        yaw = None
+
+        try:
+            x1, y1, x2, y2 = cv2.HoughLines(edges, 1, np.pi/180, 100)[:1]
+            
+            if(x2-x1 != 0):
+                yaw = (y2-y1)/(x2-x1)
+        except:
+            yaw = 0.0
+
+        if yaw <= -0.5:
+            state2 = 0
+        elif yaw < 0.0:
+            state2 = 1
+        elif yaw == 0.0:
+            state2 = 2
+        elif yaw >= 0.5:
+            state2 = 4
+        else:
+            state2 = 3
+
+        return int(''.join([str(state), str(state2)]))
 
     def _is_done(self, observations):
         return self.done
