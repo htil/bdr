@@ -41,10 +41,10 @@ if __name__ == '__main__':
     num_episodes = 1000
 
     # Discretize the action space
-    num_actions = 5
+    num_actions = 89
 
     # Size of observation space
-    num_states = 2 ** (env.observation_space.shape[0] * env.observation_space.shape[1])
+    num_states = 5
 
     # Initialize the algorithm
     learner = QLearner(num_states=num_states,
@@ -76,7 +76,6 @@ if __name__ == '__main__':
             observation, reward, done, info = env.step(action)
 
             if done:
-                reward += step
                 cumulated_reward += reward
                 last_time_steps = np.append(last_time_steps, [int(step + 1)])
                 break

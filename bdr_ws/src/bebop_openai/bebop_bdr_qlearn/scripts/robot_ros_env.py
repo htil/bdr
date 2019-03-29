@@ -27,6 +27,7 @@ class RobotRosEnv(gym.Env):
         return obs, reward, done, info
 
     def reset(self):
+        self.speed = 0.0
         self.takeoff()
         self.done = False
         obs = self._get_obs()

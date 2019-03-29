@@ -25,6 +25,8 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         try:
             if key == Key.space:
                 self.done = True
+            elif key == Key.esc:
+                self.speed = 0.05
 
         except AttributeError:
             pass
@@ -83,8 +85,11 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
         center = np.sum(img[hh-80:hh+120, ww-75:ww+75] == 255)
         print(center)
 
-        if center > 0:
-            reward = 1
+        reward = 0
+        if center > 0 and self.speed > 0.0:
+            reward = 2
+        else:
+            reward = 0.5
 
         self.cumulated_reward += reward
         self.cumulated_steps += 1

@@ -24,8 +24,8 @@ import pandas as pd
 class Bebop2Env(robot_ros_env.RobotRosEnv):
 
     def __init__(self):
-	    self.image = None
-        self.speed = 0.075
+	self.image = None
+        self.speed = 0.0
         self.error = 0.0
         self.last_error = 0.0
 
@@ -138,15 +138,18 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         self._land_pub.publish(land_cmd)
         self.wait_time_for_execute_movement()
 
-    def move(self, action):
+    def move(self, action): 
         kpi, kdi = [int(x) for x in str(action).zfill(2)]
-        y = self.kp[kpi] * self.error + self.kd[kdi] * (self.error - self.last_error);
+        print(str(kpi), str(kdi), str(self.error))
+        y = -0.5*(self.kp[kpi] * self.error + self.kd[kdi] * (self.error - self.last_error));
+        z = -0.75*(self.kp[kpi] * self.error + self.kd[kdi] * (self.error - self.last_error));
 
         print("Action Taken: ", str(y))
 
         velocity_cmd = Twist()
         velocity_cmd.linear.x  = self.speed
         velocity_cmd.linear.y  = y
+        velocity_cmd.angular.z = z
 
         self._check_cmd_vel_pub_connection()
         self._cmd_vel_pub.publish(velocity_cmd)
