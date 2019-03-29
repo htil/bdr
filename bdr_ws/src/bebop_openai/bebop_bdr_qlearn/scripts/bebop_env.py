@@ -24,30 +24,23 @@ import pandas as pd
 class Bebop2Env(robot_ros_env.RobotRosEnv):
 
     def __init__(self):
-	self.camera_image_raw = None
-        self.lateral = 0
+	    self.image = None
         self.speed = 0.075
-        self.yaw = 0
+        self.error = 0.0
+        self.last_error = 0.0
 
         # Define action and observation space
-        self.action_space = spaces.Box(np.array([-1, 0, -1]), np.array([1, 0.5, 1]), dtype=np.float32) #yaw, speed, lateral
-        self.observation_space = np.zeros(shape=(3,5))
+        self.actions = 89
+        self.observations = 5
 
-        self.num_bins = 10
-        self.angular_z_bins = pd.cut([-1, 1], bins=self.num_bins, retbins=True)[1][1:-1]
-        self.linear_x_bins  = pd.cut([ 0, 1], bins=self.num_bins, retbins=True)[1][1:-1]
-        self.linear_y_bins  = pd.cut([-1, 1], bins=self.num_bins, retbins=True)[1][1:-1]
-
-        self.move_low = -1.0
-        self.speed_low = 0.0
-        self.high = 1.0
+        self.kp = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+        self.kd = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
 
         # Launch the init function of the Parent Class robot_gazebo_env.RobotGazeboEnv
         super(Bebop2Env, self).__init__()
 
         # Start all the ROS related components
         self._image_sub = rospy.Subscriber("/bebop/image_raw", Image, self._camera_image_raw_callback)
-        self._image_pub = rospy.Publisher("/bebop/filtered", Image, queue_size=1)
         self._cmd_vel_pub = rospy.Publisher('/bebop/cmd_vel', Twist, queue_size=1)
         self._takeoff_pub = rospy.Publisher('/bebop/takeoff', Empty, queue_size=1)
         self._land_pub = rospy.Publisher('/bebop/land', Empty, queue_size=1)
@@ -79,11 +72,8 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         lower = np.array([0], dtype=np.uint8)
         upper = np.array([60], dtype=np.uint8)
         filtered = cv2.inRange(gray, lower, upper)
-        scaled = cv2.resize(filtered, None, fx=0.006, fy=0.006) 
 
-        self.camera_image_raw = filtered
-        self.camera_image_scaled = scaled
-        self._image_pub.publish(bridge.cv2_to_imgmsg(filtered))
+        self.image = filtered
     
     def _check_all_publishers_ready(self):
         self._check_cmd_vel_pub_connection()
@@ -147,29 +137,12 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         self._check_land_pub_connection()
         self._land_pub.publish(land_cmd)
         self.wait_time_for_execute_movement()
-        
-    def get_bin_value(self, bins, idx, low):
-        if idx == 0:
-            return np.average([low, bins[idx]])
-        elif idx == 9:
-            return np.average([bins[idx-1], self.high])
-        else:
-            return np.average([bins[idx], bins[idx-1]]) 
 
     def move(self, action):
-        y = 0.0
-        if action == 0:
-            y = -0.1
-        elif action == 1:
-            y = -0.05
-        elif action == 2:
-            y = 0.0
-        elif action == 3:
-            y = 0.05
-        elif action == 4:
-            y = 0.1
+        kpi, kdi = [int(x) for x in str(action).zfill(2)]
+        y = self.kp[kpi] * self.error + self.kd[kdi] * (self.error - self.last_error);
 
-        print("Action Taken: " + str(y) + "\n")
+        print("Action Taken: ", str(y))
 
         velocity_cmd = Twist()
         velocity_cmd.linear.x  = self.speed
@@ -178,10 +151,9 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         self._check_cmd_vel_pub_connection()
         self._cmd_vel_pub.publish(velocity_cmd)
         self.wait_time_for_execute_movement()
-
                                         
     def wait_time_for_execute_movement(self):
-        time.sleep(0.25)
+        time.sleep(0.1)
     
     def get_camera_image_raw(self):
         return self.camera_image_raw

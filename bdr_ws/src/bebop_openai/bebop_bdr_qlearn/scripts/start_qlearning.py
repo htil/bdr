@@ -76,7 +76,7 @@ if __name__ == '__main__':
             observation, reward, done, info = env.step(action)
 
             if done:
-                reward -= 200
+                reward += step
                 cumulated_reward += reward
                 last_time_steps = np.append(last_time_steps, [int(step + 1)])
                 break
