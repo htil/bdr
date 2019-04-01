@@ -30,12 +30,10 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         self.last_error = 0.0
 
         # Define action and observation space
-        self.actions = 889
+        self.actions = 8889
         self.observations = 56
 
-        self.kp = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-        self.kd = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-        self.yaw = [-0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4]
+        self.K = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
 
         # Launch the init function of the Parent Class robot_gazebo_env.RobotGazeboEnv
         super(Bebop2Env, self).__init__()
@@ -140,10 +138,9 @@ class Bebop2Env(robot_ros_env.RobotRosEnv):
         self.wait_time_for_execute_movement()
 
     def move(self, action): 
-        kpi, kdi, yi = [int(x) for x in str(action).zfill(3)]
-        print(str(kpi), str(kdi), str(yi))
-        y = -0.5*(self.kp[kpi] * self.error + self.kd[kdi] * (self.error - self.last_error))
-        z = self.yaw[yi]
+        p1, d1, p2, d2 = [int(x) for x in str(action).zfill(4)]
+        y = -0.5*(self.K[p1] * self.error + self.K[d1] * (self.error - self.last_error))
+        z = -0.5*(self.K[p2] * self.error + self.K[d2] * (self.error - self.last_error))
 
         print("Action Taken: ", str(y), str(z))
 

@@ -13,12 +13,6 @@ import numpy as np
 import pandas as pd
 import pickle
 
-def build_state(features):
-    return int("".join(map(lambda feature: str(int(feature)), features)))
-
-def to_bin(value, bins):
-    return np.digitize(x=[value], bins=bins)[0]
-
 if __name__ == '__main__':
     rospy.init_node('bebop_bdr_qlearn', anonymous=True, log_level=rospy.WARN)
 
@@ -41,7 +35,7 @@ if __name__ == '__main__':
     num_episodes = 1000
 
     # Discretize the action space
-    num_actions = 889
+    num_actions = 8889
 
     # Size of observation space
     num_states = 56

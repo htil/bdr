@@ -89,10 +89,10 @@ class Bebop2BdrEnv(bebop_env.Bebop2Env):
             state2 = 1
         elif yaw == 0.0:
             state2 = 2
-        elif yaw >= 0.5:
-            state2 = 4
-        else:
+        elif yaw > 0.0 and yaw <= 0.5:
             state2 = 3
+        else:
+            state2 = 4
 
         return int(''.join([str(state), str(state2)]))
 
