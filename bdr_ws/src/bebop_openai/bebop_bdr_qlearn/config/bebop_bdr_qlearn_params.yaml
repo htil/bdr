@@ -1,0 +1,27 @@
+bebop: # namespace
+    
+    # qlearn parameters
+    alpha: 1.0
+    gamma: 0.7
+    epsilon: 0.9
+    epsilon_discount: 0.999
+    nepisodes: 500
+    nsteps: 500
+    number_splits: 10 # set to change the number of state splits for the continuous problem and also the number of env_variable splits
+
+    running_step: 0.06 # time for each step
+    wait_time: 0.1 # time to wait in the reset phases
+
+    n_actions: 3 
+    n_observations: 6 
+
+    speed_step: 1.0 # time to wait in the reset phases
+    
+    speed_reward: 5
+    centered_reward: 10
+    end_episode_reward: 200
+
+    centered_penalty: -10
+    end_episode_penalty: -200
+    
+

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <rosparam command="load" file="$(find bebop_bdr_qlearn)/config/bebop_bdr_qlearn_params.yaml" />
+    <node pkg="bebop_bdr_qlearn" name="qlearning" type="start_qlearning.py" output="screen"/>
+</launch>

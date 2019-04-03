@@ -1,0 +1,2 @@
+bebop_autonomy/bebop_autonomy:bebop_autonomy/bebop_description:bebop_autonomy/bebop_driver:bebop_autonomy/bebop_msgs:bebop_autonomy/bebop_tools:bebop_openai/bebop_bdr_qlearn
+-DCATKIN_DEVEL_PREFIX=/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/devel -DCMAKE_INSTALL_PREFIX=/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/install -G Unix Makefiles

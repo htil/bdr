@@ -1,0 +1,8 @@
+prefix=/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/install
+
+Name: bebop_bdr_qlearn
+Description: Description of bebop_bdr_qlearn
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/install/lib 
+Requires: roscpp
