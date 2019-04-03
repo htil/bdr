@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/src
+CMAKE_SOURCE_DIR = /home/htil/bdr/bdr_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build
+CMAKE_BINARY_DIR = /home/htil/bdr/bdr_ws/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,16 +78,16 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
 
-# Special rule for the target test
-test/fast: test
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
 
-.PHONY : test/fast
+.PHONY : edit_cache/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -100,17 +100,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -122,27 +111,27 @@ install/local/fast: install/local
 
 .PHONY : install/local/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
 
-# Special rule for the target install/strip
-install/strip/fast: install/strip
+# Special rule for the target test
+test/fast: test
 
-.PHONY : install/strip/fast
+.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/CMakeFiles /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_msgs/CMakeFiles/progress.marks
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/CMakeFiles 0
+	cd /home/htil/bdr/bdr_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/htil/bdr/bdr_ws/build/CMakeFiles /home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_msgs/CMakeFiles/progress.marks
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/htil/bdr/bdr_ws/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/clean
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/clean
 .PHONY : clean
 
 # The main clean target
@@ -152,277 +141,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/preinstall
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/preinstall
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/htil/bdr/bdr_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_cpp: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : std_msgs_generate_messages_cpp
-
-# fast build rule for target.
-std_msgs_generate_messages_cpp/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
-.PHONY : std_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged/fast
-
-# Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged.dir/rule
 
 # Convenience name for target.
@@ -432,312 +166,42 @@ _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChan
 
 # fast build rule for target.
 _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged.dir/build
 .PHONY : _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/rule
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange/fast
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/rule
-
-# Convenience name for target.
-bebop_msgs_gencpp: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/rule
-
-.PHONY : bebop_msgs_gencpp
-
-# fast build rule for target.
-bebop_msgs_gencpp/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/build
-.PHONY : bebop_msgs_gencpp/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_eus: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-.PHONY : std_msgs_generate_messages_eus
-
-# fast build rule for target.
-std_msgs_generate_messages_eus/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build
-.PHONY : std_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_py: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-.PHONY : std_msgs_generate_messages_py
-
-# fast build rule for target.
-std_msgs_generate_messages_py/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build
-.PHONY : std_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged/fast
+_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged/fast
 
 # Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged.dir/rule
 
 # Convenience name for target.
@@ -747,252 +211,177 @@ _bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateCha
 
 # fast build rule for target.
 _bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged.dir/build
 .PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged/fast
+_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/rule
 
 # Convenience name for target.
-bebop_msgs_generate_messages_nodejs: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/rule
 
-.PHONY : bebop_msgs_generate_messages_nodejs
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged
 
 # fast build rule for target.
-bebop_msgs_generate_messages_nodejs/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/build
-.PHONY : bebop_msgs_generate_messages_nodejs/fast
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/rule
+std_msgs_generate_messages_cpp: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo
+.PHONY : std_msgs_generate_messages_cpp
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo/fast
+std_msgs_generate_messages_cpp/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+.PHONY : std_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged/fast
+_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged/fast
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/rule
 
 # Convenience name for target.
-bebop_msgs_generate_messages_py: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/rule
+_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/rule
 
-.PHONY : bebop_msgs_generate_messages_py
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged
 
 # fast build rule for target.
-bebop_msgs_generate_messages_py/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/build
-.PHONY : bebop_msgs_generate_messages_py/fast
+_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/rule
 
 # Convenience name for target.
-std_msgs_generate_messages_lisp: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/rule
 
-.PHONY : std_msgs_generate_messages_lisp
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged
 
 # fast build rule for target.
-std_msgs_generate_messages_lisp/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-.PHONY : std_msgs_generate_messages_lisp/fast
+_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged/fast
+_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2/fast
+_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/rule
+_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories/fast
+_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged/fast
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun/fast
 
 # Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion.dir/rule
 
 # Convenience name for target.
@@ -1002,27 +391,12 @@ _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCom
 
 # fast build rule for target.
 _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion.dir/build
 .PHONY : _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged/fast
-
-# Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged.dir/rule
 
 # Convenience name for target.
@@ -1032,147 +406,42 @@ _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableC
 
 # fast build rule for target.
 _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged.dir/build
 .PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged/fast
+_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/rule
+bebop_msgs_gencpp: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged
+.PHONY : bebop_msgs_gencpp
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-bebop_msgs_generate_messages_cpp: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : bebop_msgs_generate_messages_cpp
-
-# fast build rule for target.
-bebop_msgs_generate_messages_cpp/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/build
-.PHONY : bebop_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-bebop_msgs_generate_messages_lisp: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : bebop_msgs_generate_messages_lisp
-
-# fast build rule for target.
-bebop_msgs_generate_messages_lisp/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/build
-.PHONY : bebop_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation/fast
+bebop_msgs_gencpp/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gencpp.dir/build
+.PHONY : bebop_msgs_gencpp/fast
 
 # Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged.dir/rule
 
 # Convenience name for target.
@@ -1182,297 +451,72 @@ _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeCha
 
 # fast build rule for target.
 _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged.dir/build
 .PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/rule
+_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent/fast
+_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged/fast
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged/fast
+_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged/fast
 
 # Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/rule
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/rule
 
 # Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/rule
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/rule
 
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged
 
 # fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_nodejs: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : std_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-std_msgs_generate_messages_nodejs/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
-.PHONY : std_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-bebop_msgs_generate_messages_eus: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/rule
-
-.PHONY : bebop_msgs_generate_messages_eus
-
-# fast build rule for target.
-bebop_msgs_generate_messages_eus/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/build
-.PHONY : bebop_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged/fast
-
-# Convenience name for target.
-bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/rule
-.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/rule
-
-# Convenience name for target.
-_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/rule
-
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged
-
-# fast build rule for target.
-_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/build
-.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged/fast
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged/fast
 
 # Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures.dir/rule
 
 # Convenience name for target.
@@ -1482,12 +526,837 @@ _bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures: bebop_autonom
 
 # fast build rule for target.
 _bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures.dir/build
 .PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures/fast
 
 # Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_eus: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+.PHONY : std_msgs_generate_messages_eus
+
+# fast build rule for target.
+std_msgs_generate_messages_eus/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+.PHONY : std_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_py: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+
+.PHONY : std_msgs_generate_messages_py
+
+# fast build rule for target.
+std_msgs_generate_messages_py/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build
+.PHONY : std_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_lisp: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : std_msgs_generate_messages_lisp
+
+# fast build rule for target.
+std_msgs_generate_messages_lisp/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+.PHONY : std_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+bebop_msgs_generate_messages_eus: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/rule
+
+.PHONY : bebop_msgs_generate_messages_eus
+
+# fast build rule for target.
+bebop_msgs_generate_messages_eus/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_eus.dir/build
+.PHONY : bebop_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+bebop_msgs_generate_messages_cpp: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : bebop_msgs_generate_messages_cpp
+
+# fast build rule for target.
+bebop_msgs_generate_messages_cpp/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_cpp.dir/build
+.PHONY : bebop_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+bebop_msgs_generate_messages_py: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/rule
+
+.PHONY : bebop_msgs_generate_messages_py
+
+# fast build rule for target.
+bebop_msgs_generate_messages_py/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_py.dir/build
+.PHONY : bebop_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+bebop_msgs_generate_messages_lisp: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : bebop_msgs_generate_messages_lisp
+
+# fast build rule for target.
+bebop_msgs_generate_messages_lisp/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_lisp.dir/build
+.PHONY : bebop_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged/fast
+
+# Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged.dir/rule
 
 # Convenience name for target.
@@ -1497,12 +1366,132 @@ _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibratio
 
 # fast build rule for target.
 _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged.dir/build
 .PHONY : _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged/fast
 
 # Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_nodejs: bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : std_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+std_msgs_generate_messages_nodejs/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+.PHONY : std_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+bebop_msgs_generate_messages_nodejs: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : bebop_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+bebop_msgs_generate_messages_nodejs/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages_nodejs.dir/build
+.PHONY : bebop_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/rule:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/rule
+.PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/rule
+
+# Convenience name for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged: bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/rule
+
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged
+
+# fast build rule for target.
+_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged/fast:
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/_bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged.dir/build
+.PHONY : _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged/fast
+
+# Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages.dir/rule
 
 # Convenience name for target.
@@ -1512,12 +1501,12 @@ bebop_msgs_generate_messages: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_ge
 
 # fast build rule for target.
 bebop_msgs_generate_messages/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_generate_messages.dir/build
 .PHONY : bebop_msgs_generate_messages/fast
 
 # Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_geneus.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_geneus.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_geneus.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_geneus.dir/rule
 
 # Convenience name for target.
@@ -1527,12 +1516,12 @@ bebop_msgs_geneus: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_geneus.dir/ru
 
 # fast build rule for target.
 bebop_msgs_geneus/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_geneus.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_geneus.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_geneus.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_geneus.dir/build
 .PHONY : bebop_msgs_geneus/fast
 
 # Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genlisp.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genlisp.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genlisp.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genlisp.dir/rule
 
 # Convenience name for target.
@@ -1542,12 +1531,12 @@ bebop_msgs_genlisp: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genlisp.dir/
 
 # fast build rule for target.
 bebop_msgs_genlisp/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genlisp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genlisp.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genlisp.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genlisp.dir/build
 .PHONY : bebop_msgs_genlisp/fast
 
 # Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gennodejs.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gennodejs.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gennodejs.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gennodejs.dir/rule
 
 # Convenience name for target.
@@ -1557,12 +1546,12 @@ bebop_msgs_gennodejs: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gennodejs.
 
 # fast build rule for target.
 bebop_msgs_gennodejs/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gennodejs.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gennodejs.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gennodejs.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_gennodejs.dir/build
 .PHONY : bebop_msgs_gennodejs/fast
 
 # Convenience name for target.
 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genpy.dir/rule:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genpy.dir/rule
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genpy.dir/rule
 .PHONY : bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genpy.dir/rule
 
 # Convenience name for target.
@@ -1572,7 +1561,7 @@ bebop_msgs_genpy: bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genpy.dir/rule
 
 # fast build rule for target.
 bebop_msgs_genpy/fast:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genpy.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genpy.dir/build
+	cd /home/htil/bdr/bdr_ws/build && $(MAKE) -f bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genpy.dir/build.make bebop_autonomy/bebop_msgs/CMakeFiles/bebop_msgs_genpy.dir/build
 .PHONY : bebop_msgs_genpy/fast
 
 # Help Target
@@ -1583,100 +1572,99 @@ help:
 	@echo "... depend"
 	@echo "... list_install_components"
 	@echo "... install"
-	@echo "... test"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged"
 	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChangedV2"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeAvailabilityChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged"
+	@echo "... std_msgs_generate_messages_cpp"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged"
+	@echo "... bebop_msgs_gencpp"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged"
+	@echo "... std_msgs_generate_messages_eus"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent"
+	@echo "... std_msgs_generate_messages_py"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged"
+	@echo "... edit_cache"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged"
+	@echo "... std_msgs_generate_messages_lisp"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown"
+	@echo "... bebop_msgs_generate_messages_eus"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged"
+	@echo "... bebop_msgs_generate_messages_cpp"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel"
 	@echo "... rebuild_cache"
 	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAlertStateChanged"
 	@echo "... _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigModificationEnabled"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateProductModel"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonAnimationsStateList"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiAuthChannelListChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContentForCurrentRun"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoStateListChanged"
-	@echo "... std_msgs_generate_messages_cpp"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkPlayErrorStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateNumberOfSatelliteChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateAccessoryConfigChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonChargerStateLastChargeRateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStatemodeChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateLandingStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateComponentStateListChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateWifiScanListChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMissionItemExecuted"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoStreamModeChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateBatteryStateChanged"
-	@echo "... bebop_msgs_gencpp"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlyingStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAttitudeChanged"
-	@echo "... std_msgs_generate_messages_eus"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged"
-	@echo "... std_msgs_generate_messages_py"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateControllerLibARCommandsVersion"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateSensorsStatesListChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonOverHeatStateOverHeatRegulationChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonChargerStateCurrentChargeStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged"
-	@echo "... bebop_msgs_generate_messages_nodejs"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged"
-	@echo "... bebop_msgs_generate_messages_py"
-	@echo "... edit_cache"
-	@echo "... std_msgs_generate_messages_lisp"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateNavigateHomeStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2"
 	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3AccessoryStateConnectedAccessories"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentDateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChangedV2"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonChargerStateMaxChargeRateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3GPSStateHomeTypeChosenChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged"
 	@echo "... _bebop_msgs_generate_messages_check_deps_CommonAudioStateAudioStreamingRunning"
 	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAirSpeedChanged"
 	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageInfoRemainingListChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateDeviceLibARCommandsVersion"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStatePitotCalibrationStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaStreamingStateVideoEnableChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStatePictureStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateWifiSignalChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateFlatTrimChanged"
-	@echo "... bebop_msgs_generate_messages_cpp"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged"
-	@echo "... install/local"
-	@echo "... bebop_msgs_generate_messages_lisp"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateVelocityRange"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonRunStateRunIdChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientationV2"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiScanChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAltitudeChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStateChanged"
+	@echo "... bebop_msgs_generate_messages_py"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonARLibsVersionsStateSkyControllerLibARCommandsVersion"
 	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3NetworkStateAllWifiAuthChannelChanged"
+	@echo "... bebop_msgs_generate_messages_lisp"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoResolutionState"
 	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStatedefaultCameraOrientation"
 	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientation"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateAutoTakeOffModeChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageContent"
 	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3AntiflickeringStateelectricFrequencyChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateGpsLocationChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStateSpeedChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateLockStateChanged"
+	@echo "... install/local"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged"
+	@echo "... test"
 	@echo "... _bebop_msgs_generate_messages_check_deps_CommonAccessoryStateSupportedAccessoriesListChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonHeadlightsStateintensityChanged"
-	@echo "... install/strip"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3MediaRecordStateVideoStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateMassStorageStateListChanged"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateDeprecatedMassStorageContentChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationRequiredState"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateCountryListKnown"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateAllStatesChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateVideoRecordingTimestamp"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatemoveToChanged"
-	@echo "... bebop_msgs_generate_messages_eus"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PilotingStatePositionChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonMavlinkStateMavlinkFilePlayingStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonFlightPlanStateAvailabilityStateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationAxisToCalibrateChanged"
-	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3PROStateFeatures"
-	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCalibrationStateMagnetoCalibrationStartedChanged"
+	@echo "... _bebop_msgs_generate_messages_check_deps_Ardrone3CameraStateOrientationV2"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonChargerStateChargingInfo"
+	@echo "... bebop_msgs_generate_messages_nodejs"
+	@echo "... _bebop_msgs_generate_messages_check_deps_CommonCommonStateCurrentTimeChanged"
 	@echo "... bebop_msgs_generate_messages"
 	@echo "... bebop_msgs_geneus"
 	@echo "... bebop_msgs_genlisp"
@@ -1693,6 +1681,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/htil/bdr/bdr_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

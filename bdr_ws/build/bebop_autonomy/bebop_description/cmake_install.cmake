@@ -1,8 +1,8 @@
-# Install script for directory: /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/src/bebop_autonomy/bebop_description
+# Install script for directory: /home/htil/bdr/bdr_ws/src/bebop_autonomy/bebop_description
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/htil/bdr/bdr_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_description/catkin_generated/installspace/bebop_description.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_description/catkin_generated/installspace/bebop_description.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bebop_description/cmake" TYPE FILE FILES
-    "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_description/catkin_generated/installspace/bebop_descriptionConfig.cmake"
-    "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_description/catkin_generated/installspace/bebop_descriptionConfig-version.cmake"
+    "/home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_description/catkin_generated/installspace/bebop_descriptionConfig.cmake"
+    "/home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_description/catkin_generated/installspace/bebop_descriptionConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bebop_description" TYPE FILE FILES "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/src/bebop_autonomy/bebop_description/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bebop_description" TYPE FILE FILES "/home/htil/bdr/bdr_ws/src/bebop_autonomy/bebop_description/package.xml")
 endif()
 

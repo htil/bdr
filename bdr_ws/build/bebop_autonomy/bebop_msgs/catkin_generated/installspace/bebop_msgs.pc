@@ -1,8 +1,8 @@
-prefix=/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/install
+prefix=/home/htil/bdr/bdr_ws/install
 
 Name: bebop_msgs
 Description: Description of bebop_msgs
 Version: 0.7.0
-Cflags: -I/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/install/include
-Libs: -L/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/install/lib 
+Cflags: -I/home/htil/bdr/bdr_ws/install/include
+Libs: -L/home/htil/bdr/bdr_ws/install/lib 
 Requires: message_runtime std_msgs

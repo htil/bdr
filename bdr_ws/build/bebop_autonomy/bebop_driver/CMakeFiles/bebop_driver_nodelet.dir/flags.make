@@ -6,5 +6,5 @@ CXX_FLAGS = -fPIC
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"bebop_driver\" -Dbebop_driver_nodelet_EXPORTS
 
-CXX_INCLUDES = -I/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/devel/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/opt/ros/kinetic/include/parrot_arsdk -I/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/src/bebop_autonomy/bebop_driver/include -I/usr/include/x86_64-linux-gnu 
+CXX_INCLUDES = -I/home/htil/bdr/bdr_ws/devel/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/opt/ros/kinetic/include/parrot_arsdk -I/home/htil/bdr/bdr_ws/src/bebop_autonomy/bebop_driver/include -I/usr/include/x86_64-linux-gnu 
 

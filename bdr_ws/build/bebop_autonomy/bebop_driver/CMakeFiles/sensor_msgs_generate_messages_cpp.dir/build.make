@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/src
+CMAKE_SOURCE_DIR = /home/htil/bdr/bdr_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build
+CMAKE_BINARY_DIR = /home/htil/bdr/bdr_ws/build
 
 # Utility rule file for sensor_msgs_generate_messages_cpp.
 
@@ -63,10 +63,10 @@ bebop_autonomy/bebop_driver/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/bui
 .PHONY : bebop_autonomy/bebop_driver/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
 
 bebop_autonomy/bebop_driver/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/clean:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_driver && $(CMAKE_COMMAND) -P CMakeFiles/sensor_msgs_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_driver && $(CMAKE_COMMAND) -P CMakeFiles/sensor_msgs_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : bebop_autonomy/bebop_driver/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/clean
 
 bebop_autonomy/bebop_driver/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/depend:
-	cd /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/src /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/src/bebop_autonomy/bebop_driver /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_driver /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_driver/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/htil/bdr/bdr_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/htil/bdr/bdr_ws/src /home/htil/bdr/bdr_ws/src/bebop_autonomy/bebop_driver /home/htil/bdr/bdr_ws/build /home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_driver /home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_driver/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : bebop_autonomy/bebop_driver/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/depend
 

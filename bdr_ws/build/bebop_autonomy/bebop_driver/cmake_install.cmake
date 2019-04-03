@@ -1,8 +1,8 @@
-# Install script for directory: /home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/src/bebop_autonomy/bebop_driver
+# Install script for directory: /home/htil/bdr/bdr_ws/src/bebop_autonomy/bebop_driver
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/htil/bdr/bdr_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,33 +33,33 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/bebop_driver" TYPE FILE FILES "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/devel/include/bebop_driver/BebopArdrone3Config.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/bebop_driver" TYPE FILE FILES "/home/htil/bdr/bdr_ws/devel/include/bebop_driver/BebopArdrone3Config.h")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/bebop_driver" TYPE FILE FILES "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/devel/lib/python2.7/dist-packages/bebop_driver/__init__.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/bebop_driver" TYPE FILE FILES "/home/htil/bdr/bdr_ws/devel/lib/python2.7/dist-packages/bebop_driver/__init__.py")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  execute_process(COMMAND "/usr/bin/python" -m compileall "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/devel/lib/python2.7/dist-packages/bebop_driver/cfg")
+  execute_process(COMMAND "/usr/bin/python" -m compileall "/home/htil/bdr/bdr_ws/devel/lib/python2.7/dist-packages/bebop_driver/cfg")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/bebop_driver" TYPE DIRECTORY FILES "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/devel/lib/python2.7/dist-packages/bebop_driver/cfg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/bebop_driver" TYPE DIRECTORY FILES "/home/htil/bdr/bdr_ws/devel/lib/python2.7/dist-packages/bebop_driver/cfg")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_driver/catkin_generated/installspace/bebop_driver.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_driver/catkin_generated/installspace/bebop_driver.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bebop_driver/cmake" TYPE FILE FILES
-    "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_driver/catkin_generated/installspace/bebop_driverConfig.cmake"
-    "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/build/bebop_autonomy/bebop_driver/catkin_generated/installspace/bebop_driverConfig-version.cmake"
+    "/home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_driver/catkin_generated/installspace/bebop_driverConfig.cmake"
+    "/home/htil/bdr/bdr_ws/build/bebop_autonomy/bebop_driver/catkin_generated/installspace/bebop_driverConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bebop_driver" TYPE FILE FILES "/home/htil/Documents/bdr-cfc8271e0834a2481b4018a760c212cd3ca15cc9/bdr_ws/src/bebop_autonomy/bebop_driver/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/bebop_driver" TYPE FILE FILES "/home/htil/bdr/bdr_ws/src/bebop_autonomy/bebop_driver/package.xml")
 endif()
 
