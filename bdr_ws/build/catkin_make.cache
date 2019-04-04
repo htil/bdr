@@ -1,2 +1,0 @@
-bebop_autonomy/bebop_autonomy:bebop_autonomy/bebop_description:bebop_autonomy/bebop_driver:bebop_autonomy/bebop_msgs:bebop_autonomy/bebop_tools:brain_drone_race/brain_drone_race
--DCATKIN_DEVEL_PREFIX=/home/htil/bdr/bdr_ws/devel -DCMAKE_INSTALL_PREFIX=/home/htil/bdr/bdr_ws/install -G Unix Makefiles

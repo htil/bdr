@@ -122,7 +122,7 @@ class Bebop:
 		if self.debug:
 			print("engagement:", engagement)
 			print("speed:", speed)
-			print("action:", (y, z))
+			print("action:", y, z)
 
 		velocity_cmd = Twist()
 		velocity_cmd.linear.x  = speed
