@@ -1,8 +1,0 @@
-prefix=/home/htil/bdr/bdr_ws/install
-
-Name: brain_drone_race
-Description: Description of brain_drone_race
-Version: 1.0.0
-Cflags: 
-Libs: -L/home/htil/bdr/bdr_ws/install/lib 
-Requires: roscpp
