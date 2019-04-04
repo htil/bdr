@@ -161,7 +161,7 @@ class Bebop:
                 rospy.logerr("/bebop/image_raw not ready yet, retrying...")
         return self.imageelf)
         
-	def _camera_image_raw_callback(self, data):
+	def image_callback(self, data):
 		bridge = CvBridge()
 		img = bridge.imgmsg_to_cv2(data, "bgr8")
 
@@ -172,8 +172,8 @@ class Bebop:
 		filtered = cv2.inRange(gray, lower, upper)
 		
 		if self.debug:
-			cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-			cv2.imshow('image', filtered)
+			cv2.namedWindow('masked image', cv2.WINDOW_NORMAL)
+			cv2.imshow('masked image', filtered)
 			cv2.waitKey(1)
 
 		self.image = filtered
