@@ -1,5 +1,6 @@
 import rospy
 from std_msgs.msg import Empty
+from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 from pynput.keyboard import Key, Listener
 
@@ -162,7 +163,7 @@ class Bebop:
 				rospy.logdebug("/bebop/image_raw ready")
 			except:
 				rospy.logerr("/bebop/image_raw not ready yet, retrying...")
-		return self.imageelf)
+		return self.image
 		
 	def image_callback(self, data):
 		bridge = CvBridge()

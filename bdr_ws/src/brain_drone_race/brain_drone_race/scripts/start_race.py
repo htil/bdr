@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import Bebop
+from bebop import Bebop
 
 if __name__ == '__main__':
 	drone = Bebop()
