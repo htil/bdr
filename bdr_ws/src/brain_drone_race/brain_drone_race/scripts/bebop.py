@@ -71,7 +71,9 @@ class Bebop:
         takeoff_cmd = Empty()
         self.check_publisher_ready(self.takeoff_pub, "/bebop/takeoff")
         self.takeoff_pub.publish(takeoff_cmd)
-        self.wait(5.0)
+        
+		self.done = False
+		self.wait(5.0)
         
     def land(self):
         land_cmd = Empty()        
