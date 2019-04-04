@@ -18,9 +18,9 @@ class Bebop:
 		self.image = None
 		self.speed = 0.0
 		self.max_speed = 0.2
-		self.threshold = 0.3
+		self.threshold = 0.15
 		
-		self.color = "black"
+		self.color = "white"
 		self.ready = False
 		self.done = False
 		self.debug = debug
@@ -177,10 +177,9 @@ class Bebop:
 			filtered = cv2.inRange(gray, lower, upper)
 
 		elif self.color == "white":
-			hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-			lower = np.array([0, 0, 0],   dtype=np.uint8)
-			upper = np.array([0, 0, 255], dtype=np.uint8)
-			filtered = cv2.inRange(hsv, lower, upper)
+			lower = np.array([200, 200, 200],   dtype=np.uint8)
+			upper = np.array([255, 255, 255], dtype=np.uint8)
+			filtered = cv2.inRange(img, lower, upper)
 		
 		if self.debug:
 			cv2.namedWindow('masked image', cv2.WINDOW_NORMAL)
