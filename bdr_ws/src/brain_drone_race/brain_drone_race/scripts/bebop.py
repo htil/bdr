@@ -59,81 +59,81 @@ class Bebop:
 		rospy.logwarn("Race environment successfully initialized")
 		
 	def on_press(self, key):
-        try:
-            if key == Key.space:
-                self.done = True
-        except AttributeError:
-            pass	
+		try:
+			if key == Key.space:
+				self.done = True
+		except AttributeError:
+			pass	
 	
-    def takeoff(self):
-    	self.wait(5.0)
-    	self.wait_for_engagement()
-    	
-        takeoff_cmd = Empty()
-        self.check_publisher_ready(self.takeoff_pub, "/bebop/takeoff")
-        self.takeoff_pub.publish(takeoff_cmd)
-        
+	def takeoff(self):
+		self.wait(5.0)
+		self.wait_for_engagement()
+		
+		takeoff_cmd = Empty()
+		self.check_publisher_ready(self.takeoff_pub, "/bebop/takeoff")
+		self.takeoff_pub.publish(takeoff_cmd)
+		
 		self.done = False
 		self.wait(5.0)
-        
-    def land(self):
-        land_cmd = Empty()        
-        self.check_publisher_ready(self.land_pub, "/bebop/land") 
-        self.land_pub.publish(land_cmd)
+		
+	def land(self):
+		land_cmd = Empty()        
+		self.check_publisher_ready(self.land_pub, "/bebop/land") 
+		self.land_pub.publish(land_cmd)
 
 	def wait_for_engagement(self):
 		engagement = self.db.child("bdr/engagement").get().val()
-        while engagement < self.threshold:
-        	engagement = self.db.child("bdr/engagement").get().val()
+		while engagement < self.threshold:
+			engagement = self.db.child("bdr/engagement").get().val()
 
 	def set_error(self):
-        h, w = self.image.shape[:2]
-        wall = w//5
+		h, w = self.image.shape[:2]
+		wall = w//5
 
-        r1 = np.sum(self.image[0:h, 0*wall:1*wall] == 255)
-        r2 = np.sum(self.image[0:h, 1*wall:2*wall] == 255)
-        r3 = np.sum(self.image[0:h, 2*wall:3*wall] == 255)
-        r4 = np.sum(self.image[0:h, 3*wall:4*wall] == 255)
-        r5 = np.sum(self.image[0:h, 4*wall:5*wall] == 255)
-        
-        region = max(r1, r2, r3, r4, r5)
-        self.last_error = self.error
+		r1 = np.sum(self.image[0:h, 0*wall:1*wall] == 255)
+		r2 = np.sum(self.image[0:h, 1*wall:2*wall] == 255)
+		r3 = np.sum(self.image[0:h, 2*wall:3*wall] == 255)
+		r4 = np.sum(self.image[0:h, 3*wall:4*wall] == 255)
+		r5 = np.sum(self.image[0:h, 4*wall:5*wall] == 255)
+		
+		region = max(r1, r2, r3, r4, r5)
+		self.last_error = self.error
 
-        if region == r1:
-            self.error = -2
-        elif region == r2:
-            self.error = -1
-        elif region == r3:
-            self.error = 0
-        elif region == r4:
-            self.error = 1
-        else:
-            self.error = 2
+		if region == r1:
+			self.error = -2
+		elif region == r2:
+			self.error = -1
+		elif region == r3:
+			self.error = 0
+		elif region == r4:
+			self.error = 1
+		else:
+			self.error = 2
 
-    def move(self): 
-    	self.set_error()
-        y = self.yscale * (self.kp * self.error + self.kd * (self.error - self.last_error))
-        z = self.zscale * (self.kp * self.error + self.kd * (self.error - self.last_error))
-        
-        engagement = self.db.child("bdr/engagement").get().val()
-        speed = self.scale(self.max_speed, engagement)
-        
-        if self.debug:
-        	print("engagement:", engagement)
-        	print("speed:", speed)
-        	print("action:", (y, z))
+	def move(self): 
+		self.set_error()
+		y = self.yscale * (self.kp * self.error + self.kd * (self.error - self.last_error))
+		z = self.zscale * (self.kp * self.error + self.kd * (self.error - self.last_error))
+		
+		engagement = self.db.child("bdr/engagement").get().val()
+		speed = self.scale(self.max_speed, engagement)
+		
+		if self.debug:
+			print("engagement:", engagement)
+			print("speed:", speed)
+			print("action:", (y, z))
 
-        velocity_cmd = Twist()
-        velocity_cmd.linear.x  = speed
-        velocity_cmd.linear.y  = y
-        velocity_cmd.angular.z = z
+		velocity_cmd = Twist()
+		velocity_cmd.linear.x  = speed
+		velocity_cmd.linear.y  = y
+		velocity_cmd.angular.z = z
 
-        self.check_publisher_ready(self.cmd_vel_pub, "/bebop/cmd_vel")
-        self.cmd_vel_pub.publish(velocity_cmd)
-        self.wait()
-                                        
+		self.check_publisher_ready(self.cmd_vel_pub, "/bebop/cmd_vel")
+		self.cmd_vel_pub.publish(velocity_cmd)
+		self.wait()
+										
 	def wait(self, ms = 0.1):
-        time.sleep(ms)
+		time.sleep(ms)
 
 	def scale(self, factor, delta):
 		return factor * np.clip(delta, 0, 1)
@@ -146,24 +146,24 @@ class Bebop:
 		
 	def check_publisher_ready(self, publisher, name):
 		rate = rospy.Rate(10)
-        while publisher.get_num_connections() == 0 and not rospy.is_shutdown():
-            rospy.logerr(name + " not ready yet, retrying...")
-            try:
-                rate.sleep()
-            except rospy.ROSInterruptException:
-                pass
-        rospy.logwarn(name + " ready")
-        
+		while publisher.get_num_connections() == 0 and not rospy.is_shutdown():
+			rospy.logerr(name + " not ready yet, retrying...")
+			try:
+				rate.sleep()
+			except rospy.ROSInterruptException:
+				pass
+		rospy.logwarn(name + " ready")
+		
 	def check_camera_image_ready(self):
-        rospy.logerr("Waiting for /bebop/image_raw to be ready...")
-        while self.image is None and not rospy.is_shutdown():
-            try:
-                self.image = rospy.wait_for_message("/bebop/image_raw", Image, timeout=5.0)
-                rospy.logdebug("/bebop/image_raw ready")
-            except:
-                rospy.logerr("/bebop/image_raw not ready yet, retrying...")
-        return self.imageelf)
-        
+		rospy.logerr("Waiting for /bebop/image_raw to be ready...")
+		while self.image is None and not rospy.is_shutdown():
+			try:
+				self.image = rospy.wait_for_message("/bebop/image_raw", Image, timeout=5.0)
+				rospy.logdebug("/bebop/image_raw ready")
+			except:
+				rospy.logerr("/bebop/image_raw not ready yet, retrying...")
+		return self.imageelf)
+		
 	def image_callback(self, data):
 		bridge = CvBridge()
 		img = bridge.imgmsg_to_cv2(data, "bgr8")
