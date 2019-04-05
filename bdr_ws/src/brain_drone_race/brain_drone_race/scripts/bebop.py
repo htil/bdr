@@ -1,5 +1,5 @@
 import rospy
-from std_msgs.msg import Empty
+from std_msgs.msg import Empty, Float32
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 from pynput.keyboard import Key, Listener
@@ -19,6 +19,7 @@ class Bebop:
 		self.speed = 0.0
 		self.max_speed = 0.2
 		self.threshold = 0.15
+		self.engagement = 0.0
 		
 		self.color = "white"
 		self.ready = False
@@ -37,6 +38,8 @@ class Bebop:
 		self.land_pub    = rospy.Publisher('/bebop/land', Empty, queue_size=1)
 		self.cmd_vel_pub = rospy.Publisher('/bebop/cmd_vel', Twist, queue_size=1)
 		self.image_sub   = rospy.Subscriber('/bebop/image_raw', Image, self.image_callback)
+		self.engagement_sub = rospy.Subscriber('/engagement', Float32, self.engagement_callback)
+
 	
 		# Firebase
 		config = {
@@ -83,9 +86,9 @@ class Bebop:
 		self.land_pub.publish(land_cmd)
 
 	def wait_for_engagement(self):
-		engagement = self.db.child("bdr/engagement").get().val()
+		engagement = self.engagement
 		while engagement < self.threshold:
-			engagement = self.db.child("bdr/engagement").get().val()
+			engagement = self.engagement
 
 	def set_error(self):
 		h, w = self.image.shape[:2]
@@ -116,11 +119,10 @@ class Bebop:
 		y = self.yscale * (self.kp * self.error + self.kd * (self.error - self.last_error))
 		z = self.zscale * (self.kp * self.error + self.kd * (self.error - self.last_error))
 		
-		engagement = self.db.child("bdr/engagement").get().val()
-		speed = self.scale(self.max_speed, engagement)
+		speed = self.scale(self.max_speed, self.engagement)
 		
 		if self.debug:
-			print("engagement:", engagement)
+			print("engagement:", self.engagement)
 			print("speed:", speed)
 			print("action:", y, z)
 
@@ -187,4 +189,7 @@ class Bebop:
 			cv2.waitKey(1)
 
 		self.image = filtered
+		
+	def engagement_callback(self, data):
+		self.engagement = data.data
 	
