@@ -11,10 +11,12 @@ RUN apt-get update && \
 	/usr/bin/python -m pip install pyrebase && \
 	rosdep install --from-paths ./src --ignore-src -y && \
 	. /opt/ros/kinetic/setup.sh && \
+	rm -rf /bdr/build && \
 	(set +e; /opt/ros/kinetic/bin/catkin_make; /opt/ros/kinetic/bin/catkin_make; set -e) && \
-	echo "alias screen=\"screen bash\"" >> /root/.bashrc && \
+	echo "alias bscreen=\"screen bash\"" >> /root/.bashrc && \
 	echo "alias land=\"rostopic pub /bebop/land std_msgs/Empty\"" >> /root/.bashrc && \
 	echo "alias calibrate_bebop_camera=\"rostopic pub /bebop/camera_control geometry_msgs/Twist \\\"{linear: {x: 0, y: 0, z: 0}, angular: {x: 0, y: -90, z: 0}}\\\"\"" >> /root/.bashrc && \
+	echo "export SHELL=/bin/bash" >> /root/.bashrc && \
 	echo ". /bdr/devel/setup.bash" >> /root/.bashrc
 
 # Install web dependencies
