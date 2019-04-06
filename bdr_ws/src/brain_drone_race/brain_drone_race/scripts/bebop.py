@@ -2,14 +2,14 @@ import rospy
 from std_msgs.msg import Empty, Float32
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
-from pynput.keyboard import Key, Listener
+#from pynput.keyboard import Key, Listener
 
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
 
 import pyrebase
 import numpy as np
-import pandas as pd
+#import pandas as pd
 import time
 
 class Bebop:
@@ -54,20 +54,20 @@ class Bebop:
 		self.db = self.firebase.database()
 	
 		# Keyboard Listener
-		self.listener = Listener(on_press=self.on_press)
-		self.listener.start()
+		#self.listener = Listener(on_press=self.on_press)
+		#self.listener.start()
 	
 		# Setup Routine
 		rospy.init_node('brain_drone_race', anonymous=True, log_level=rospy.WARN)
 		self.check_all_sensors_ready()
 		rospy.logwarn("Race environment successfully initialized")
 		
-	def on_press(self, key):
-		try:
-			if key == Key.space:
-				self.done = True
-		except AttributeError:
-			pass	
+	#def on_press(self, key):
+	#	try:
+	#		if key == Key.space:
+	#			self.done = True
+	#	except AttributeError:
+	#		pass	
 	
 	def takeoff(self):
 		self.wait_for_start()
@@ -76,7 +76,7 @@ class Bebop:
 		
 		takeoff_cmd = Empty()
 		self.check_publisher_ready(self.takeoff_pub, "/bebop/takeoff")
-		#self.takeoff_pub.publish(takeoff_cmd)
+		self.takeoff_pub.publish(takeoff_cmd)
 		
 		self.done = False
 		self.wait(5.0)
@@ -125,7 +125,8 @@ class Bebop:
 		else:
 			self.error = 2
 
-	def move(self): 
+	def move(self):
+		self.land_on_stop() 
 		self.set_error()
 		y = self.yscale * (self.kp * self.error + self.kd * (self.error - self.last_error))
 		z = self.zscale * (self.kp * self.error + self.kd * (self.error - self.last_error))

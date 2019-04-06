@@ -2,7 +2,7 @@
 from bebop import Bebop
 
 if __name__ == '__main__':
-	drone = Bebop(debug=True)
+	drone = Bebop(debug=False)
 	
 	while True:
 		drone.takeoff()
