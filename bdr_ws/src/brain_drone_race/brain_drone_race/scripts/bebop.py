@@ -21,7 +21,7 @@ class Bebop:
 		self.threshold = 0.15
 		self.engagement = 0.0
 		
-		self.color = "white"
+		self.color = "black"
 		self.ready = False
 		self.done = False
 		self.debug = debug
@@ -43,12 +43,12 @@ class Bebop:
 	
 		# Firebase
 		config = {
-			"apiKey": "AIzaSyBe_QFRRwle_V0VR8UX8hmM71Ul7Pihhjs",
-			"authDomain": "bdr-qualifiers.firebaseapp.com",
-			"databaseURL": "https://bdr-qualifiers.firebaseio.com",
-			"projectId": "bdr-qualifiers",
-			"storageBucket": "bdr-qualifiers.appspot.com",
-			"messagingSenderId": "136624516589"
+			apiKey: "AIzaSyBTUkaNa4H9gow6V1hRvNy62r8lWaBUE9k",
+    			authDomain: "braindronerace.firebaseapp.com",
+			databaseURL: "https://braindronerace.firebaseio.com",
+			projectId: "braindronerace",
+			storageBucket: "braindronerace.appspot.com",
+			messagingSenderId: "743801530945"
 		}
 		self.firebase = pyrebase.initialize_app(config)
 		self.db = self.firebase.database()
@@ -70,12 +70,13 @@ class Bebop:
 			pass	
 	
 	def takeoff(self):
+		self.wait_for_start()
 		self.wait(5.0)
 		self.wait_for_engagement()
 		
 		takeoff_cmd = Empty()
 		self.check_publisher_ready(self.takeoff_pub, "/bebop/takeoff")
-		self.takeoff_pub.publish(takeoff_cmd)
+		#self.takeoff_pub.publish(takeoff_cmd)
 		
 		self.done = False
 		self.wait(5.0)
@@ -89,6 +90,16 @@ class Bebop:
 		engagement = self.engagement
 		while engagement < self.threshold:
 			engagement = self.engagement
+
+	def wait_for_start(self):
+		status = self.db.child('status/status/value').get().val()
+		while status != "START":
+			status = self.db.child('status/status/value').get().val()
+			
+	def land_on_stop(self):
+		status = self.db.child('status/status/value').get().val()
+		if status == "STOP":
+			self.land()
 
 	def set_error(self):
 		h, w = self.image.shape[:2]
