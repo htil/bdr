@@ -17,7 +17,7 @@ class Bebop:
 		# Variables
 		self.image = None
 		self.speed = 0.0
-		self.max_speed = 0.2
+		self.max_speed = 0.1
 		self.threshold = 0.15
 		self.engagement = 0.0
 		
@@ -90,16 +90,20 @@ class Bebop:
 		engagement = self.engagement
 		while engagement < self.threshold:
 			engagement = self.engagement
+		print("engagement threshold met")
 
 	def wait_for_start(self):
 		status = self.db.child('status/status/value').get().val()
+		print("initial status", status)
 		while status != "START":
 			status = self.db.child('status/status/value').get().val()
+		print("status is ready")
 			
 	def land_on_stop(self):
 		status = self.db.child('status/status/value').get().val()
 		if status == "STOP":
 			self.land()
+			self.done = True
 
 	def set_error(self):
 		h, w = self.image.shape[:2]
