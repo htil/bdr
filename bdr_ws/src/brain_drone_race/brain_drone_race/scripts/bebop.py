@@ -43,12 +43,12 @@ class Bebop:
 	
 		# Firebase
 		config = {
-			apiKey: "AIzaSyBTUkaNa4H9gow6V1hRvNy62r8lWaBUE9k",
-    			authDomain: "braindronerace.firebaseapp.com",
-			databaseURL: "https://braindronerace.firebaseio.com",
-			projectId: "braindronerace",
-			storageBucket: "braindronerace.appspot.com",
-			messagingSenderId: "743801530945"
+			"apiKey": "AIzaSyBTUkaNa4H9gow6V1hRvNy62r8lWaBUE9k",
+    			"authDomain": "braindronerace.firebaseapp.com",
+			"databaseURL": "https://braindronerace.firebaseio.com",
+			"projectId": "braindronerace",
+			"storageBucket": "braindronerace.appspot.com",
+			"messagingSenderId": "743801530945"
 		}
 		self.firebase = pyrebase.initialize_app(config)
 		self.db = self.firebase.database()
